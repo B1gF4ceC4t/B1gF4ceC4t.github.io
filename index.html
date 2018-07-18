@@ -347,14 +347,7 @@
       
         
           
-            <h2 id="安装-antd"><a href="#安装-antd" class="headerlink" title="安装 antd"></a>安装 antd</h2><p>通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。</p>
-<blockquote>
-<blockquote>
-</blockquote>
-<p>npm install antd –save<br>npm install babel-plugin-import –save-dev</p>
-<blockquote>
-</blockquote>
-</blockquote>
+            <h2 id="安装-antd"><a href="#安装-antd" class="headerlink" title="安装 antd"></a>安装 antd</h2><p>通过 <code>npm</code> 安装 <code>antd</code> 和 <code>babel-plugin-import</code> 。<code>babel-plugin-import</code> 是用来按需加载 <code>antd</code> 的脚本和样式的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install antd --save</span><br><span class="line">$ npm install babel-plugin-import --save-dev</span><br></pre></td></tr></table></figure></p>
 <h2 id="配置-plugin"><a href="#配置-plugin" class="headerlink" title="配置 plugin"></a>配置 plugin</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * webpack.config.dev.js</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  test: /\.(js|jsx|mjs)$/,</span><br><span class="line">  include: paths.appSrc,</span><br><span class="line">  loader: require.resolve(&apos;babel-loader&apos;),</span><br><span class="line">  options: &#123;</span><br><span class="line">    cacheDirectory: true,</span><br><span class="line">    // antd 按需加载</span><br><span class="line">    plugins: [</span><br><span class="line">      [&apos;import&apos;, &#123; &apos;libraryName&apos;: &apos;antd&apos;, &apos;libraryDirectory&apos;: &apos;es&apos;, &apos;style&apos;: &apos;css&apos; &#125;]</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * webpack.config.prod.js</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  test: /\.(js|jsx|mjs)$/,</span><br><span class="line">  include: paths.appSrc,</span><br><span class="line">  loader: require.resolve(&apos;babel-loader&apos;),</span><br><span class="line">  options: &#123;</span><br><span class="line">    compact: true,</span><br><span class="line">    // antd 按需加载</span><br><span class="line">    plugins: [</span><br><span class="line">      [&apos;import&apos;, &#123; &apos;libraryName&apos;: &apos;antd&apos;, &apos;libraryDirectory&apos;: &apos;es&apos;, &apos;style&apos;: &apos;css&apos; &#125;]</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -667,13 +660,7 @@
           
             <h1 id="immutability-helper"><a href="#immutability-helper" class="headerlink" title="immutability-helper"></a>immutability-helper</h1><hr>
 <p>不改变原始数据生成该数据的拷贝</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<blockquote>
-</blockquote>
-<p>  npm install immutability-helper –save</p>
-<blockquote>
-</blockquote>
-</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install immutability-helper --save</span><br></pre></td></tr></table></figure>
 <h2 id="可接受命令"><a href="#可接受命令" class="headerlink" title="可接受命令"></a>可接受命令</h2><ul>
 <li><strong>{$push: array}</strong> 对目标 <code>push()</code> array内所有项。</li>
 <li><strong>{$unshift: array}</strong> 对目标 <code>unshift()</code> array内所有项。</li>
@@ -979,7 +966,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共771字</span>
+  <span class="post-count">博客全站共774字</span>
 </div>
         
 

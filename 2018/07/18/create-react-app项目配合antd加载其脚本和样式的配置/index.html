@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。    npm install antd –savenpm install babel-plugin-import –save-dev    配置 plugin12345678910111213141516/* * webpac">
+<meta name="description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。12$ npm install antd --save$ npm install babel-plugin-import --save-dev 配置 plugin12345678910111213141516/* * webpa">
 <meta name="keywords" content="create-react-app,antd,babel-plugin-import">
 <meta property="og:type" content="article">
 <meta property="og:title" content="create-react-app项目配合antd加载其脚本和样式的配置">
 <meta property="og:url" content="https://b1gf4cec4t.github.io/2018/07/18/create-react-app项目配合antd加载其脚本和样式的配置/index.html">
 <meta property="og:site_name" content="B1gF4ceC4t">
-<meta property="og:description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。    npm install antd –savenpm install babel-plugin-import –save-dev    配置 plugin12345678910111213141516/* * webpac">
+<meta property="og:description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。12$ npm install antd --save$ npm install babel-plugin-import --save-dev 配置 plugin12345678910111213141516/* * webpa">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-18T02:56:28.321Z">
+<meta property="og:updated_time" content="2018-07-18T03:03:09.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="create-react-app项目配合antd加载其脚本和样式的配置">
-<meta name="twitter:description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。    npm install antd –savenpm install babel-plugin-import –save-dev    配置 plugin12345678910111213141516/* * webpac">
+<meta name="twitter:description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。12$ npm install antd --save$ npm install babel-plugin-import --save-dev 配置 plugin12345678910111213141516/* * webpa">
 
 
 
@@ -347,14 +347,7 @@
       
 
       
-        <h2 id="安装-antd"><a href="#安装-antd" class="headerlink" title="安装 antd"></a>安装 antd</h2><p>通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。</p>
-<blockquote>
-<blockquote>
-</blockquote>
-<p>npm install antd –save<br>npm install babel-plugin-import –save-dev</p>
-<blockquote>
-</blockquote>
-</blockquote>
+        <h2 id="安装-antd"><a href="#安装-antd" class="headerlink" title="安装 antd"></a>安装 antd</h2><p>通过 <code>npm</code> 安装 <code>antd</code> 和 <code>babel-plugin-import</code> 。<code>babel-plugin-import</code> 是用来按需加载 <code>antd</code> 的脚本和样式的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install antd --save</span><br><span class="line">$ npm install babel-plugin-import --save-dev</span><br></pre></td></tr></table></figure></p>
 <h2 id="配置-plugin"><a href="#配置-plugin" class="headerlink" title="配置 plugin"></a>配置 plugin</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * webpack.config.dev.js</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  test: /\.(js|jsx|mjs)$/,</span><br><span class="line">  include: paths.appSrc,</span><br><span class="line">  loader: require.resolve(&apos;babel-loader&apos;),</span><br><span class="line">  options: &#123;</span><br><span class="line">    cacheDirectory: true,</span><br><span class="line">    // antd 按需加载</span><br><span class="line">    plugins: [</span><br><span class="line">      [&apos;import&apos;, &#123; &apos;libraryName&apos;: &apos;antd&apos;, &apos;libraryDirectory&apos;: &apos;es&apos;, &apos;style&apos;: &apos;css&apos; &#125;]</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * webpack.config.prod.js</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  test: /\.(js|jsx|mjs)$/,</span><br><span class="line">  include: paths.appSrc,</span><br><span class="line">  loader: require.resolve(&apos;babel-loader&apos;),</span><br><span class="line">  options: &#123;</span><br><span class="line">    compact: true,</span><br><span class="line">    // antd 按需加载</span><br><span class="line">    plugins: [</span><br><span class="line">      [&apos;import&apos;, &#123; &apos;libraryName&apos;: &apos;antd&apos;, &apos;libraryDirectory&apos;: &apos;es&apos;, &apos;style&apos;: &apos;css&apos; &#125;]</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -575,7 +568,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共771字</span>
+  <span class="post-count">博客全站共774字</span>
 </div>
         
 
