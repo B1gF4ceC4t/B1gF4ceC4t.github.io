@@ -298,7 +298,7 @@ img {
   height: auto;
 }
 hr {
-  margin: 20px 0;
+  margin: 40px 0;
   height: 3px;
   border: none;
   background-color: #ddd;
@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #52b1fc;
+  background: #baff3c;
 }
 .links-of-blogroll {
   font-size: 13px;

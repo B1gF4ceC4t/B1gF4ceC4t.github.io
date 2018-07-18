@@ -82,7 +82,7 @@
 
 
 
-  <meta name="keywords" content="React,组件按需加载," />
+  <meta name="keywords" content="create-react-app,antd,babel-plugin-import," />
 
 
 
@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="React组件按需加载方案 思路使用高阶组件实现组件的按需加载 实现代码示例定义asyncComponent12345678910111213141516171819202122import React, &amp;#123; Component &amp;#125; from &amp;apos;react&amp;apos;;export default function asyncComponent(importCompo">
-<meta name="keywords" content="React,组件按需加载">
+<meta name="description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。    npm install antd –savenpm install babel-plugin-import –save-dev    配置 plugin12345678910111213141516/* * webpac">
+<meta name="keywords" content="create-react-app,antd,babel-plugin-import">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React组件按需加载方案">
-<meta property="og:url" content="https://b1gf4cec4t.github.io/2018/07/12/React组件按需加载方案/index.html">
+<meta property="og:title" content="create-react-app项目配合antd加载其脚本和样式的配置">
+<meta property="og:url" content="https://b1gf4cec4t.github.io/2018/07/18/create-react-app项目配合antd加载其脚本和样式的配置/index.html">
 <meta property="og:site_name" content="B1gF4ceC4t">
-<meta property="og:description" content="React组件按需加载方案 思路使用高阶组件实现组件的按需加载 实现代码示例定义asyncComponent12345678910111213141516171819202122import React, &amp;#123; Component &amp;#125; from &amp;apos;react&amp;apos;;export default function asyncComponent(importCompo">
+<meta property="og:description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。    npm install antd –savenpm install babel-plugin-import –save-dev    配置 plugin12345678910111213141516/* * webpac">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-18T02:49:30.790Z">
+<meta property="og:updated_time" content="2018-07-18T02:56:28.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React组件按需加载方案">
-<meta name="twitter:description" content="React组件按需加载方案 思路使用高阶组件实现组件的按需加载 实现代码示例定义asyncComponent12345678910111213141516171819202122import React, &amp;#123; Component &amp;#125; from &amp;apos;react&amp;apos;;export default function asyncComponent(importCompo">
+<meta name="twitter:title" content="create-react-app项目配合antd加载其脚本和样式的配置">
+<meta name="twitter:description" content="安装 antd通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。    npm install antd –savenpm install babel-plugin-import –save-dev    配置 plugin12345678910111213141516/* * webpac">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://b1gf4cec4t.github.io/2018/07/12/React组件按需加载方案/"/>
+  <link rel="canonical" href="https://b1gf4cec4t.github.io/2018/07/18/create-react-app项目配合antd加载其脚本和样式的配置/"/>
 
 
 
 
 
-  <title>React组件按需加载方案 | B1gF4ceC4t</title>
+  <title>create-react-app项目配合antd加载其脚本和样式的配置 | B1gF4ceC4t</title>
   
 
 
@@ -247,7 +247,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2018/07/12/React组件按需加载方案/">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2018/07/18/create-react-app项目配合antd加载其脚本和样式的配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fiona">
@@ -264,7 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">React组件按需加载方案</h1>
+          <h1 class="post-title" itemprop="name headline">create-react-app项目配合antd加载其脚本和样式的配置</h1>
         
 
         <div class="post-meta">
@@ -276,8 +276,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T10:29:48+08:00">
-                2018-07-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-18T10:42:37+08:00">
+                2018-07-18
               </time>
             
 
@@ -347,10 +347,16 @@
       
 
       
-        <h1 id="React组件按需加载方案"><a href="#React组件按需加载方案" class="headerlink" title="React组件按需加载方案"></a>React组件按需加载方案</h1><hr>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用高阶组件实现组件的按需加载</p>
-<h2 id="实现代码示例"><a href="#实现代码示例" class="headerlink" title="实现代码示例"></a>实现代码示例</h2><h3 id="定义asyncComponent"><a href="#定义asyncComponent" class="headerlink" title="定义asyncComponent"></a>定义asyncComponent</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">export default function asyncComponent(importComponent) &#123;</span><br><span class="line">  class AsyncComponent extends Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">      super(props);</span><br><span class="line">      this.state = &#123;</span><br><span class="line">        component: null</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    async componentDidMount() &#123;</span><br><span class="line">      const &#123; default: component &#125; = await importComponent();</span><br><span class="line">      this.setState(&#123;component&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">      const C = this.state.component;</span><br><span class="line">      return C ? &lt;C &#123;...this.props&#125; /&gt; : null;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return AsyncComponent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="使用asyncComponent实现按需加载"><a href="#使用asyncComponent实现按需加载" class="headerlink" title="使用asyncComponent实现按需加载"></a>使用asyncComponent实现按需加载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const Example = asyncComponent(() =&gt; import(&apos;./example.js&apos;));</span><br></pre></td></tr></table></figure>
+        <h2 id="安装-antd"><a href="#安装-antd" class="headerlink" title="安装 antd"></a>安装 antd</h2><p>通过 npm 安装 antd 和 babel-plugin-import 。babel-plugin-import 是用来按需加载 antd 的脚本和样式的。</p>
+<blockquote>
+<blockquote>
+</blockquote>
+<p>npm install antd –save<br>npm install babel-plugin-import –save-dev</p>
+<blockquote>
+</blockquote>
+</blockquote>
+<h2 id="配置-plugin"><a href="#配置-plugin" class="headerlink" title="配置 plugin"></a>配置 plugin</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * webpack.config.dev.js</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  test: /\.(js|jsx|mjs)$/,</span><br><span class="line">  include: paths.appSrc,</span><br><span class="line">  loader: require.resolve(&apos;babel-loader&apos;),</span><br><span class="line">  options: &#123;</span><br><span class="line">    cacheDirectory: true,</span><br><span class="line">    // antd 按需加载</span><br><span class="line">    plugins: [</span><br><span class="line">      [&apos;import&apos;, &#123; &apos;libraryName&apos;: &apos;antd&apos;, &apos;libraryDirectory&apos;: &apos;es&apos;, &apos;style&apos;: &apos;css&apos; &#125;]</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * webpack.config.prod.js</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  test: /\.(js|jsx|mjs)$/,</span><br><span class="line">  include: paths.appSrc,</span><br><span class="line">  loader: require.resolve(&apos;babel-loader&apos;),</span><br><span class="line">  options: &#123;</span><br><span class="line">    compact: true,</span><br><span class="line">    // antd 按需加载</span><br><span class="line">    plugins: [</span><br><span class="line">      [&apos;import&apos;, &#123; &apos;libraryName&apos;: &apos;antd&apos;, &apos;libraryDirectory&apos;: &apos;es&apos;, &apos;style&apos;: &apos;css&apos; &#125;]</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -368,9 +374,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/React/" rel="tag"># React</a>
+            <a href="/tags/create-react-app/" rel="tag"># create-react-app</a>
           
-            <a href="/tags/组件按需加载/" rel="tag"># 组件按需加载</a>
+            <a href="/tags/antd/" rel="tag"># antd</a>
+          
+            <a href="/tags/babel-plugin-import/" rel="tag"># babel-plugin-import</a>
           
         </div>
       
@@ -383,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/11/immutability-helper学习笔记/" rel="next" title="immutability-helper 学习笔记">
-                <i class="fa fa-chevron-left"></i> immutability-helper 学习笔记
+              <a href="/2018/07/12/React组件按需加载方案/" rel="next" title="React组件按需加载方案">
+                <i class="fa fa-chevron-left"></i> React组件按需加载方案
               </a>
             
           </div>
@@ -392,10 +400,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/18/create-react-app项目配合antd加载其脚本和样式的配置/" rel="prev" title="create-react-app项目配合antd加载其脚本和样式的配置">
-                create-react-app项目配合antd加载其脚本和样式的配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -527,7 +531,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React组件按需加载方案"><span class="nav-number">1.</span> <span class="nav-text">React组件按需加载方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现代码示例"><span class="nav-number">1.2.</span> <span class="nav-text">实现代码示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义asyncComponent"><span class="nav-number">1.2.1.</span> <span class="nav-text">定义asyncComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用asyncComponent实现按需加载"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用asyncComponent实现按需加载</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-antd"><span class="nav-number">1.</span> <span class="nav-text">安装 antd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-plugin"><span class="nav-number">2.</span> <span class="nav-text">配置 plugin</span></a></li></ol></div>
             
 
           </div>

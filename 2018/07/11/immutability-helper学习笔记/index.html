@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="B1gF4ceC4t">
 <meta property="og:description" content="immutability-helper 不改变原始数据生成该数据的拷贝 安装     npm install immutability-helper –save    可接受命令 {$push: array} 对目标 push() array内所有项。 {$unshift: array} 对目标 unshift() array内所有项。 {$splice: array of arrays} 对目标">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-12T02:12:42.827Z">
+<meta property="og:updated_time" content="2018-07-18T02:47:53.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="immutability-helper 学习笔记">
 <meta name="twitter:description" content="immutability-helper 不改变原始数据生成该数据的拷贝 安装     npm install immutability-helper –save    可接受命令 {$push: array} 对目标 push() array内所有项。 {$unshift: array} 对目标 unshift() array内所有项。 {$splice: array of arrays} 对目标">
@@ -368,28 +368,7 @@
 <li><strong>{$add: array of objects}</strong> 对 <code>Map</code> 和 <code>Set</code> 增加一个value。当目标是 <code>Set</code> 时，传入的是一个对象数组；当目标是 <code>Map</code> 时，传入的是一个子项为 <code>[key, value]</code> 格式的数组，如：<code>update(myMap, {$add: [[&#39;foo&#39;, &#39;bar&#39;], [&#39;baz&#39;, &#39;boo&#39;]]})</code>。</li>
 <li><strong>{$remove: array of strings}</strong> 从一个 Map 或 Set 中移除某些key。</li>
 </ul>
-<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><blockquote>
-<blockquote>
-</blockquote>
-<p>  import update from ‘immutability-helper’;</p>
-<blockquote>
-</blockquote>
-<p>  const initialArray = [1, 2, 3];<br>  const newArray = update(initialArray, {$push: [4]}); // =&gt; [1, 2, 3, 4]</p>
-<blockquote>
-</blockquote>
-<p>  const collection = [1, 2, {a: [12, 17, 15]}];<br>  const newCollection = update(collection, {2: {a: {$splice: [[1, 1, 13, 14]]}}});<br>  // =&gt; [1, 2, {a: [12, 13, 14, 15]}]</p>
-<blockquote>
-</blockquote>
-<p>  const obj = {a: 5, b: 3};<br>  const newObj = update(obj, {b: {$apply: function(x) {return x <em> 2;}}});<br>  // =&gt; {a: 5, b: 6}<br>  // This is equivalent, but gets verbose for deeply nested collections:<br>  const newObj2 = update(obj, {b: {$set: obj.b </em> 2}});</p>
-<blockquote>
-</blockquote>
-<p>  const obj = {a: 5, b: 3};<br>  const newObj = update(obj, {$merge: {b: 6, c: 7}}); // =&gt; {a: 5, b: 6, c: 7}</p>
-<blockquote>
-</blockquote>
-<p>  const collection = {children: [‘zero’, ‘one’, ‘two’]};<br>  const index = 1;<br>  const newCollection = update(collection, {children: {[index]: {$set: 1}}});<br>  // =&gt; {children: [‘zero’, 1, ‘two’]}</p>
-<blockquote>
-</blockquote>
-</blockquote>
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import update from &apos;immutability-helper&apos;;</span><br><span class="line"></span><br><span class="line">const initialArray = [1, 2, 3];</span><br><span class="line">const newArray = update(initialArray, &#123;$push: [4]&#125;); // =&gt; [1, 2, 3, 4]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const collection = [1, 2, &#123;a: [12, 17, 15]&#125;];</span><br><span class="line">const newCollection = update(collection, &#123;2: &#123;a: &#123;$splice: [[1, 1, 13, 14]]&#125;&#125;&#125;);</span><br><span class="line">// =&gt; [1, 2, &#123;a: [12, 13, 14, 15]&#125;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const obj = &#123;a: 5, b: 3&#125;;</span><br><span class="line">const newObj = update(obj, &#123;b: &#123;$apply: function(x) &#123;return x * 2;&#125;&#125;&#125;);</span><br><span class="line">// =&gt; &#123;a: 5, b: 6&#125;</span><br><span class="line">// This is equivalent, but gets verbose for deeply nested collections:</span><br><span class="line">const newObj2 = update(obj, &#123;b: &#123;$set: obj.b * 2&#125;&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const obj = &#123;a: 5, b: 3&#125;;</span><br><span class="line">const newObj = update(obj, &#123;$merge: &#123;b: 6, c: 7&#125;&#125;); // =&gt; &#123;a: 5, b: 6, c: 7&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const collection = &#123;children: [&apos;zero&apos;, &apos;one&apos;, &apos;two&apos;]&#125;;</span><br><span class="line">const index = 1;</span><br><span class="line">const newCollection = update(collection, &#123;children: &#123;[index]: &#123;$set: 1&#125;&#125;&#125;);</span><br><span class="line">// =&gt; &#123;children: [&apos;zero&apos;, 1, &apos;two&apos;]&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -509,7 +488,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -531,7 +510,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -608,7 +587,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共578字</span>
+  <span class="post-count">博客全站共771字</span>
 </div>
         
 
