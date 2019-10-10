@@ -82,7 +82,7 @@
 
 
 
-  <meta name="keywords" content="immutability-helper," />
+  <meta name="keywords" content="drag events,dataTransfer,IE," />
 
 
 
@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="immutability-helper 不改变原始数据生成该数据的拷贝 安装1$ npm install immutability-helper --save 可接受命令 {$push: array} 对目标 push() array内所有项。 {$unshift: array} 对目标 unshift() array内所有项。 {$splice: array of arrays} 对目标依据ar">
-<meta name="keywords" content="immutability-helper">
+<meta name="description" content="API介绍DataTransfer在进行拖放操作时，DataTransfer对象用来保存，通过拖放动作，拖动到浏览器的数据。它可以保存一项或多项数据、一种或者多种数据类型。 event.dataTransfer.setData(type, data)为一个给定的类型设置数据。如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现">
+<meta name="keywords" content="drag events,dataTransfer,IE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="immutability-helper 学习笔记">
-<meta property="og:url" content="https://b1gf4cec4t.github.io/2018/07/11/immutability-helper学习笔记/index.html">
+<meta property="og:title" content="拖拽事件drag events的dataTransfer的IE浏览器兼容问题">
+<meta property="og:url" content="https://b1gf4cec4t.github.io/2019/10/10/拖拽事件drag-events的dataTransfer的IE浏览器兼容问题/index.html">
 <meta property="og:site_name" content="B1gF4ceC4t">
-<meta property="og:description" content="immutability-helper 不改变原始数据生成该数据的拷贝 安装1$ npm install immutability-helper --save 可接受命令 {$push: array} 对目标 push() array内所有项。 {$unshift: array} 对目标 unshift() array内所有项。 {$splice: array of arrays} 对目标依据ar">
+<meta property="og:description" content="API介绍DataTransfer在进行拖放操作时，DataTransfer对象用来保存，通过拖放动作，拖动到浏览器的数据。它可以保存一项或多项数据、一种或者多种数据类型。 event.dataTransfer.setData(type, data)为一个给定的类型设置数据。如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-18T03:03:41.334Z">
+<meta property="og:updated_time" content="2019-10-10T13:40:31.320Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="immutability-helper 学习笔记">
-<meta name="twitter:description" content="immutability-helper 不改变原始数据生成该数据的拷贝 安装1$ npm install immutability-helper --save 可接受命令 {$push: array} 对目标 push() array内所有项。 {$unshift: array} 对目标 unshift() array内所有项。 {$splice: array of arrays} 对目标依据ar">
+<meta name="twitter:title" content="拖拽事件drag events的dataTransfer的IE浏览器兼容问题">
+<meta name="twitter:description" content="API介绍DataTransfer在进行拖放操作时，DataTransfer对象用来保存，通过拖放动作，拖动到浏览器的数据。它可以保存一项或多项数据、一种或者多种数据类型。 event.dataTransfer.setData(type, data)为一个给定的类型设置数据。如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://b1gf4cec4t.github.io/2018/07/11/immutability-helper学习笔记/"/>
+  <link rel="canonical" href="https://b1gf4cec4t.github.io/2019/10/10/拖拽事件drag-events的dataTransfer的IE浏览器兼容问题/"/>
 
 
 
 
 
-  <title>immutability-helper 学习笔记 | B1gF4ceC4t</title>
+  <title>拖拽事件drag events的dataTransfer的IE浏览器兼容问题 | B1gF4ceC4t</title>
   
 
 
@@ -247,7 +247,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2018/07/11/immutability-helper学习笔记/">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/10/10/拖拽事件drag-events的dataTransfer的IE浏览器兼容问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fiona">
@@ -264,7 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">immutability-helper 学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">拖拽事件drag events的dataTransfer的IE浏览器兼容问题</h1>
         
 
         <div class="post-meta">
@@ -276,8 +276,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T16:11:53+08:00">
-                2018-07-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T21:05:57+08:00">
+                2019-10-10
               </time>
             
 
@@ -347,23 +347,13 @@
       
 
       
-        <h1 id="immutability-helper"><a href="#immutability-helper" class="headerlink" title="immutability-helper"></a>immutability-helper</h1><hr>
-<p>不改变原始数据生成该数据的拷贝</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install immutability-helper --save</span><br></pre></td></tr></table></figure>
-<h2 id="可接受命令"><a href="#可接受命令" class="headerlink" title="可接受命令"></a>可接受命令</h2><ul>
-<li><strong>{$push: array}</strong> 对目标 <code>push()</code> array内所有项。</li>
-<li><strong>{$unshift: array}</strong> 对目标 <code>unshift()</code> array内所有项。</li>
-<li><strong>{$splice: array of arrays}</strong> 对目标依据array内每一项执行 <code>splice()</code>。⚠️注意：array内的每一项会被依次的使用，所以array子项的顺序很重要。目标索引在操作过程中可能会变化。</li>
-<li><strong>{$set: any}</strong> 对目标进行全部替换。</li>
-<li><strong>{$toggle: array of strings}</strong> 对目标对象中的一些布尔值进行取反操作。</li>
-<li><strong>{$unset: array of strings}</strong> 对移除目标对象移除某些key。</li>
-<li><strong>{$merge: object}</strong> 对目标对象的某个key对应的value与object进行合并。</li>
-<li><strong>{$apply: function}</strong> 当前value作为function的入参，其函数返回值将更新为新的value。</li>
-<li><strong>{$add: array of objects}</strong> 对 <code>Map</code> 和 <code>Set</code> 增加一个value。当目标是 <code>Set</code> 时，传入的是一个对象数组；当目标是 <code>Map</code> 时，传入的是一个子项为 <code>[key, value]</code> 格式的数组，如：<code>update(myMap, {$add: [[&#39;foo&#39;, &#39;bar&#39;], [&#39;baz&#39;, &#39;boo&#39;]]})</code>。</li>
-<li><strong>{$remove: array of strings}</strong> 从一个 Map 或 Set 中移除某些key。</li>
-</ul>
-<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import update from &apos;immutability-helper&apos;;</span><br><span class="line"></span><br><span class="line">const initialArray = [1, 2, 3];</span><br><span class="line">const newArray = update(initialArray, &#123;$push: [4]&#125;); // =&gt; [1, 2, 3, 4]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const collection = [1, 2, &#123;a: [12, 17, 15]&#125;];</span><br><span class="line">const newCollection = update(collection, &#123;2: &#123;a: &#123;$splice: [[1, 1, 13, 14]]&#125;&#125;&#125;);</span><br><span class="line">// =&gt; [1, 2, &#123;a: [12, 13, 14, 15]&#125;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const obj = &#123;a: 5, b: 3&#125;;</span><br><span class="line">const newObj = update(obj, &#123;b: &#123;$apply: function(x) &#123;return x * 2;&#125;&#125;&#125;);</span><br><span class="line">// =&gt; &#123;a: 5, b: 6&#125;</span><br><span class="line">// This is equivalent, but gets verbose for deeply nested collections:</span><br><span class="line">const newObj2 = update(obj, &#123;b: &#123;$set: obj.b * 2&#125;&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const obj = &#123;a: 5, b: 3&#125;;</span><br><span class="line">const newObj = update(obj, &#123;$merge: &#123;b: 6, c: 7&#125;&#125;); // =&gt; &#123;a: 5, b: 6, c: 7&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const collection = &#123;children: [&apos;zero&apos;, &apos;one&apos;, &apos;two&apos;]&#125;;</span><br><span class="line">const index = 1;</span><br><span class="line">const newCollection = update(collection, &#123;children: &#123;[index]: &#123;$set: 1&#125;&#125;&#125;);</span><br><span class="line">// =&gt; &#123;children: [&apos;zero&apos;, 1, &apos;two&apos;]&#125;</span><br></pre></td></tr></table></figure>
-
+        <h2 id="API介绍"><a href="#API介绍" class="headerlink" title="API介绍"></a>API介绍</h2><h3 id="DataTransfer"><a href="#DataTransfer" class="headerlink" title="DataTransfer"></a>DataTransfer</h3><p>在进行拖放操作时，<code>DataTransfer</code>对象用来保存，通过拖放动作，拖动到浏览器的数据。<br>它可以保存一项或多项数据、一种或者多种数据类型。</p>
+<h3 id="event-dataTransfer-setData-type-data"><a href="#event-dataTransfer-setData-type-data" class="headerlink" title="event.dataTransfer.setData(type, data)"></a>event.dataTransfer.setData(type, data)</h3><p>为一个给定的类型设置数据。<br>如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现有数据。</p>
+<h3 id="event-dataTransfer-getData-type"><a href="#event-dataTransfer-getData-type" class="headerlink" title="event.dataTransfer.getData(type)"></a>event.dataTransfer.getData(type)</h3><p>根据指定的类型检索数据.<br>如果指定类型的数据不存在或者该<code>DataTransfer</code>对象中没有数据，方法将返回一个空字符串。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><code>DataTransfer</code>对象中每个数据项应当是<code>String</code>类型，如果需要保存对象，应先使用<code>JSON.stringify</code>进行序列化处理。</p>
+<h2 id="IE浏览器兼容性"><a href="#IE浏览器兼容性" class="headerlink" title="IE浏览器兼容性"></a>IE浏览器兼容性</h2><p>IE浏览器中<code>type</code>只可以是<code>text</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 拖拽事件存储数据</span><br><span class="line"> * @param &#123;*&#125; e 事件</span><br><span class="line"> * @param &#123;*&#125; key 键值</span><br><span class="line"> * @param &#123;*&#125; value 属性值</span><br><span class="line"> */</span><br><span class="line">const draftEvent = (e, key, value) =&gt; &#123;</span><br><span class="line">    const isIE = !!window.ActiveXobject || &quot;ActiveXObject&quot; in window;</span><br><span class="line">    if (isIE) &#123;</span><br><span class="line">        const data = e.dataTransfer.getData(&quot;text&quot;);</span><br><span class="line">        const obj = data ? JSON.parse(data) : &#123;&#125;;</span><br><span class="line">        obj[key] = value;</span><br><span class="line">        e.dataTransfer.setData(&quot;text&quot;, JSON.stringify(obj));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        e.dataTransfer.setData(key, JSON.stringify(value));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 检查IE浏览器版本</span><br><span class="line"> */</span><br><span class="line">const IEVersion = () =&gt; &#123;</span><br><span class="line">    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  </span><br><span class="line">    var isIE = userAgent.indexOf(&quot;compatible&quot;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;MSIE&quot;) &gt; -1; //判断是否IE&lt;11浏览器  </span><br><span class="line">    var isEdge = userAgent.indexOf(&quot;Edge&quot;) &gt; -1 &amp;&amp; !isIE; //判断是否IE的Edge浏览器  </span><br><span class="line">    var isIE11 = userAgent.indexOf(&apos;Trident&apos;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;rv:11.0&quot;) &gt; -1;</span><br><span class="line">    if(isIE) &#123;</span><br><span class="line">        var reIE = new RegExp(&quot;MSIE (\\d+\\.\\d+);&quot;);</span><br><span class="line">        reIE.test(userAgent);</span><br><span class="line">        var fIEVersion = parseFloat(RegExp[&quot;$1&quot;]);</span><br><span class="line">        if(fIEVersion == 7) &#123;</span><br><span class="line">            return 7;</span><br><span class="line">        &#125; else if(fIEVersion == 8) &#123;</span><br><span class="line">            return 8;</span><br><span class="line">        &#125; else if(fIEVersion == 9) &#123;</span><br><span class="line">            return 9;</span><br><span class="line">        &#125; else if(fIEVersion == 10) &#123;</span><br><span class="line">            return 10;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return 6;//IE版本&lt;=7</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125; else if(isEdge) &#123;</span><br><span class="line">        return &apos;edge&apos;; //edge</span><br><span class="line">    &#125; else if(isIE11) &#123;</span><br><span class="line">        return 11; //IE11  </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return -1; //不是IE浏览器</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -380,7 +370,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/immutability-helper/" rel="tag"># immutability-helper</a>
+            <a href="/tags/drag-events/" rel="tag"># drag events</a>
+          
+            <a href="/tags/dataTransfer/" rel="tag"># dataTransfer</a>
+          
+            <a href="/tags/IE/" rel="tag"># IE</a>
           
         </div>
       
@@ -393,8 +387,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/03/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/06/15/Git更改本地和远程分支的名称/" rel="next" title="Git更改本地和远程分支的名称">
+                <i class="fa fa-chevron-left"></i> Git更改本地和远程分支的名称
               </a>
             
           </div>
@@ -402,10 +396,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/12/React组件按需加载方案/" rel="prev" title="React组件按需加载方案">
-                React组件按需加载方案 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -537,7 +527,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#immutability-helper"><span class="nav-number">1.</span> <span class="nav-text">immutability-helper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可接受命令"><span class="nav-number">1.2.</span> <span class="nav-text">可接受命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用示例"><span class="nav-number">1.3.</span> <span class="nav-text">使用示例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#API介绍"><span class="nav-number">1.</span> <span class="nav-text">API介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DataTransfer"><span class="nav-number">1.1.</span> <span class="nav-text">DataTransfer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#event-dataTransfer-setData-type-data"><span class="nav-number">1.2.</span> <span class="nav-text">event.dataTransfer.setData(type, data)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#event-dataTransfer-getData-type"><span class="nav-number">1.3.</span> <span class="nav-text">event.dataTransfer.getData(type)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">2.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IE浏览器兼容性"><span class="nav-number">3.</span> <span class="nav-text">IE浏览器兼容性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#彩蛋"><span class="nav-number">4.</span> <span class="nav-text">彩蛋</span></a></li></ol></div>
             
 
           </div>
