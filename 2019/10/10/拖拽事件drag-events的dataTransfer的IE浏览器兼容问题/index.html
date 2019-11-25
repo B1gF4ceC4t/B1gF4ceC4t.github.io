@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="B1gF4ceC4t">
 <meta property="og:description" content="API介绍DataTransfer在进行拖放操作时，DataTransfer对象用来保存，通过拖放动作，拖动到浏览器的数据。它可以保存一项或多项数据、一种或者多种数据类型。 event.dataTransfer.setData(type, data)为一个给定的类型设置数据。如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-10T13:40:31.320Z">
+<meta property="og:updated_time" content="2019-11-22T02:42:46.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拖拽事件drag events的dataTransfer的IE浏览器兼容问题">
 <meta name="twitter:description" content="API介绍DataTransfer在进行拖放操作时，DataTransfer对象用来保存，通过拖放动作，拖动到浏览器的数据。它可以保存一项或多项数据、一种或者多种数据类型。 event.dataTransfer.setData(type, data)为一个给定的类型设置数据。如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现">
@@ -354,6 +354,7 @@
 <h2 id="IE浏览器兼容性"><a href="#IE浏览器兼容性" class="headerlink" title="IE浏览器兼容性"></a>IE浏览器兼容性</h2><p>IE浏览器中<code>type</code>只可以是<code>text</code>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 拖拽事件存储数据</span><br><span class="line"> * @param &#123;*&#125; e 事件</span><br><span class="line"> * @param &#123;*&#125; key 键值</span><br><span class="line"> * @param &#123;*&#125; value 属性值</span><br><span class="line"> */</span><br><span class="line">const draftEvent = (e, key, value) =&gt; &#123;</span><br><span class="line">    const isIE = !!window.ActiveXobject || &quot;ActiveXObject&quot; in window;</span><br><span class="line">    if (isIE) &#123;</span><br><span class="line">        const data = e.dataTransfer.getData(&quot;text&quot;);</span><br><span class="line">        const obj = data ? JSON.parse(data) : &#123;&#125;;</span><br><span class="line">        obj[key] = value;</span><br><span class="line">        e.dataTransfer.setData(&quot;text&quot;, JSON.stringify(obj));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        e.dataTransfer.setData(key, JSON.stringify(value));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 检查IE浏览器版本</span><br><span class="line"> */</span><br><span class="line">const IEVersion = () =&gt; &#123;</span><br><span class="line">    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  </span><br><span class="line">    var isIE = userAgent.indexOf(&quot;compatible&quot;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;MSIE&quot;) &gt; -1; //判断是否IE&lt;11浏览器  </span><br><span class="line">    var isEdge = userAgent.indexOf(&quot;Edge&quot;) &gt; -1 &amp;&amp; !isIE; //判断是否IE的Edge浏览器  </span><br><span class="line">    var isIE11 = userAgent.indexOf(&apos;Trident&apos;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;rv:11.0&quot;) &gt; -1;</span><br><span class="line">    if(isIE) &#123;</span><br><span class="line">        var reIE = new RegExp(&quot;MSIE (\\d+\\.\\d+);&quot;);</span><br><span class="line">        reIE.test(userAgent);</span><br><span class="line">        var fIEVersion = parseFloat(RegExp[&quot;$1&quot;]);</span><br><span class="line">        if(fIEVersion == 7) &#123;</span><br><span class="line">            return 7;</span><br><span class="line">        &#125; else if(fIEVersion == 8) &#123;</span><br><span class="line">            return 8;</span><br><span class="line">        &#125; else if(fIEVersion == 9) &#123;</span><br><span class="line">            return 9;</span><br><span class="line">        &#125; else if(fIEVersion == 10) &#123;</span><br><span class="line">            return 10;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return 6;//IE版本&lt;=7</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125; else if(isEdge) &#123;</span><br><span class="line">        return &apos;edge&apos;; //edge</span><br><span class="line">    &#125; else if(isIE11) &#123;</span><br><span class="line">        return 11; //IE11  </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return -1; //不是IE浏览器</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -476,7 +477,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -498,7 +499,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -575,7 +576,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共3.2k字</span>
+  <span class="post-count">博客全站共3.3k字</span>
 </div>
         
 

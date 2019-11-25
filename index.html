@@ -243,6 +243,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/11/22/通过色值判断深浅色/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fiona">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B1gF4ceC4t">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/22/通过色值判断深浅色/" itemprop="url">通过色值判断深浅色</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-22T10:32:50+08:00">
+                2019-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/" itemprop="url" rel="index">
+                    <span itemprop="name">Technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/FontEnd/" itemprop="url" rel="index">
+                    <span itemprop="name">FontEnd</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import rgb from &quot;rgb&quot;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export const isDeepColor = color =&gt; &#123;</span><br><span class="line">    let isDeep = false;</span><br><span class="line">    const rgbColor = rgb(color);</span><br><span class="line">    const [R, G, B, A] = rgbColor</span><br><span class="line">        .replace(&quot;rgb(&quot;, &quot;&quot;)</span><br><span class="line">        .replace(&quot;rgba(&quot;, &quot;&quot;)</span><br><span class="line">        .replace(&quot;)&quot;, &quot;&quot;)</span><br><span class="line">        .split(&quot;,&quot;);</span><br><span class="line">    const Y = 0.299 * R + 0.587 * G + 0.114 * B;</span><br><span class="line">    if (Y &lt; 192 &amp;&amp; (!A || Number(A) &gt; 0.5)) &#123;</span><br><span class="line">        isDeep = true;</span><br><span class="line">    &#125;</span><br><span class="line">    return isDeep;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/10/29/手写代码——实现JSON-stringify/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -349,6 +503,7 @@
           
             <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function _jsonStringify(obj) &#123;</span><br><span class="line">    const type = typeof obj;</span><br><span class="line">    if (type === &quot;object&quot;) &#123;</span><br><span class="line">        if (obj === null) &#123;</span><br><span class="line">            return &apos;&quot;null&quot;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        let json = [];</span><br><span class="line">        let isArr = Array.isArray(obj);</span><br><span class="line">        for (let k in obj) &#123;</span><br><span class="line">            let v = obj[k];</span><br><span class="line">            const t = typeof obj;</span><br><span class="line">            if (t === &quot;object&quot;) &#123;</span><br><span class="line">                v = _jsonStringify(v);</span><br><span class="line">            &#125; else if (/string|undefined|function/.test(t)) &#123;</span><br><span class="line">                v = &apos;&quot;&apos; + v + &apos;&quot;&apos;;</span><br><span class="line">            &#125;</span><br><span class="line">            json.push((isArr ? &quot;&quot; : &apos;&quot;&apos; + k + &apos;&quot;:&apos;) + String(v));</span><br><span class="line">        &#125;</span><br><span class="line">        return (isArr ? &quot;[&quot; : &quot;&#123;&quot;) + String(json) + (isArr ? &quot;]&quot; : &quot;&#125;&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        if (/string|undefined|function/.test(type)) &#123;</span><br><span class="line">            obj = &apos;&quot;&apos; + obj + &apos;&quot;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        return String(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_jsonStringify([1, false, &quot;&quot;, undefined, null]); //&quot;[1,false,&quot;&quot;,&quot;undefined&quot;,&quot;null&quot;]&quot;</span><br><span class="line">_jsonStringify(&#123; a: 1, b: function() &#123;&#125; &#125;); //&quot;&#123;&quot;a&quot;:1,&quot;b&quot;:&quot;function() &#123;&#125;&quot;&#125;&quot;</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -502,6 +657,7 @@
           
             <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function _new(func) &#123;</span><br><span class="line">    let newObj = &#123;&#125;;</span><br><span class="line">    if (func.prototpye !== null) &#123;</span><br><span class="line">        newObj.__proto__ = func.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    const res = func.apply(newObj, Array.prototype.slice.call(arguments, 1));</span><br><span class="line">    if (</span><br><span class="line">        (typeof res === &quot;object&quot; || typeof res === &quot;function&quot;) &amp;&amp;</span><br><span class="line">        res !== null</span><br><span class="line">    ) &#123;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    return newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const obj = _new(Func, 1, 2); //const obj = new Func(1, 2);</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -820,6 +976,7 @@
 <h2 id="IE浏览器兼容性"><a href="#IE浏览器兼容性" class="headerlink" title="IE浏览器兼容性"></a>IE浏览器兼容性</h2><p>IE浏览器中<code>type</code>只可以是<code>text</code>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 拖拽事件存储数据</span><br><span class="line"> * @param &#123;*&#125; e 事件</span><br><span class="line"> * @param &#123;*&#125; key 键值</span><br><span class="line"> * @param &#123;*&#125; value 属性值</span><br><span class="line"> */</span><br><span class="line">const draftEvent = (e, key, value) =&gt; &#123;</span><br><span class="line">    const isIE = !!window.ActiveXobject || &quot;ActiveXObject&quot; in window;</span><br><span class="line">    if (isIE) &#123;</span><br><span class="line">        const data = e.dataTransfer.getData(&quot;text&quot;);</span><br><span class="line">        const obj = data ? JSON.parse(data) : &#123;&#125;;</span><br><span class="line">        obj[key] = value;</span><br><span class="line">        e.dataTransfer.setData(&quot;text&quot;, JSON.stringify(obj));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        e.dataTransfer.setData(key, JSON.stringify(value));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 检查IE浏览器版本</span><br><span class="line"> */</span><br><span class="line">const IEVersion = () =&gt; &#123;</span><br><span class="line">    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  </span><br><span class="line">    var isIE = userAgent.indexOf(&quot;compatible&quot;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;MSIE&quot;) &gt; -1; //判断是否IE&lt;11浏览器  </span><br><span class="line">    var isEdge = userAgent.indexOf(&quot;Edge&quot;) &gt; -1 &amp;&amp; !isIE; //判断是否IE的Edge浏览器  </span><br><span class="line">    var isIE11 = userAgent.indexOf(&apos;Trident&apos;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;rv:11.0&quot;) &gt; -1;</span><br><span class="line">    if(isIE) &#123;</span><br><span class="line">        var reIE = new RegExp(&quot;MSIE (\\d+\\.\\d+);&quot;);</span><br><span class="line">        reIE.test(userAgent);</span><br><span class="line">        var fIEVersion = parseFloat(RegExp[&quot;$1&quot;]);</span><br><span class="line">        if(fIEVersion == 7) &#123;</span><br><span class="line">            return 7;</span><br><span class="line">        &#125; else if(fIEVersion == 8) &#123;</span><br><span class="line">            return 8;</span><br><span class="line">        &#125; else if(fIEVersion == 9) &#123;</span><br><span class="line">            return 9;</span><br><span class="line">        &#125; else if(fIEVersion == 10) &#123;</span><br><span class="line">            return 10;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return 6;//IE版本&lt;=7</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125; else if(isEdge) &#123;</span><br><span class="line">        return &apos;edge&apos;; //edge</span><br><span class="line">    &#125; else if(isIE11) &#123;</span><br><span class="line">        return 11; //IE11  </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return -1; //不是IE浏览器</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -1654,137 +1811,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2018/05/03/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fiona">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="B1gF4ceC4t">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/03/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-03T16:26:08+08:00">
-                2018-05-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1828,7 +1861,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1850,7 +1883,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -1911,7 +1944,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共3.2k字</span>
+  <span class="post-count">博客全站共3.3k字</span>
 </div>
         
 
