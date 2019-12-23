@@ -243,6 +243,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/10/10/拖拽事件drag-events的dataTransfer的IE浏览器兼容问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fiona">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B1gF4ceC4t">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/10/拖拽事件drag-events的dataTransfer的IE浏览器兼容问题/" itemprop="url">拖拽事件drag events的dataTransfer的IE浏览器兼容问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T21:05:57+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/" itemprop="url" rel="index">
+                    <span itemprop="name">Technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/FontEnd/" itemprop="url" rel="index">
+                    <span itemprop="name">FontEnd</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="API介绍"><a href="#API介绍" class="headerlink" title="API介绍"></a>API介绍</h2><h3 id="DataTransfer"><a href="#DataTransfer" class="headerlink" title="DataTransfer"></a>DataTransfer</h3><p>在进行拖放操作时，<code>DataTransfer</code>对象用来保存，通过拖放动作，拖动到浏览器的数据。<br>它可以保存一项或多项数据、一种或者多种数据类型。</p>
+<h3 id="event-dataTransfer-setData-type-data"><a href="#event-dataTransfer-setData-type-data" class="headerlink" title="event.dataTransfer.setData(type, data)"></a>event.dataTransfer.setData(type, data)</h3><p>为一个给定的类型设置数据。<br>如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现有数据。</p>
+<h3 id="event-dataTransfer-getData-type"><a href="#event-dataTransfer-getData-type" class="headerlink" title="event.dataTransfer.getData(type)"></a>event.dataTransfer.getData(type)</h3><p>根据指定的类型检索数据.<br>如果指定类型的数据不存在或者该<code>DataTransfer</code>对象中没有数据，方法将返回一个空字符串。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><code>DataTransfer</code>对象中每个数据项应当是<code>String</code>类型，如果需要保存对象，应先使用<code>JSON.stringify</code>进行序列化处理。</p>
+<h2 id="IE浏览器兼容性"><a href="#IE浏览器兼容性" class="headerlink" title="IE浏览器兼容性"></a>IE浏览器兼容性</h2><p>IE浏览器中<code>type</code>只可以是<code>text</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 拖拽事件存储数据</span><br><span class="line"> * @param &#123;*&#125; e 事件</span><br><span class="line"> * @param &#123;*&#125; key 键值</span><br><span class="line"> * @param &#123;*&#125; value 属性值</span><br><span class="line"> */</span><br><span class="line">const draftEvent = (e, key, value) =&gt; &#123;</span><br><span class="line">    const isIE = !!window.ActiveXobject || &quot;ActiveXObject&quot; in window;</span><br><span class="line">    if (isIE) &#123;</span><br><span class="line">        const data = e.dataTransfer.getData(&quot;text&quot;);</span><br><span class="line">        const obj = data ? JSON.parse(data) : &#123;&#125;;</span><br><span class="line">        obj[key] = value;</span><br><span class="line">        e.dataTransfer.setData(&quot;text&quot;, JSON.stringify(obj));</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        e.dataTransfer.setData(key, JSON.stringify(value));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 检查IE浏览器版本</span><br><span class="line"> */</span><br><span class="line">const IEVersion = () =&gt; &#123;</span><br><span class="line">    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  </span><br><span class="line">    var isIE = userAgent.indexOf(&quot;compatible&quot;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;MSIE&quot;) &gt; -1; //判断是否IE&lt;11浏览器  </span><br><span class="line">    var isEdge = userAgent.indexOf(&quot;Edge&quot;) &gt; -1 &amp;&amp; !isIE; //判断是否IE的Edge浏览器  </span><br><span class="line">    var isIE11 = userAgent.indexOf(&apos;Trident&apos;) &gt; -1 &amp;&amp; userAgent.indexOf(&quot;rv:11.0&quot;) &gt; -1;</span><br><span class="line">    if(isIE) &#123;</span><br><span class="line">        var reIE = new RegExp(&quot;MSIE (\\d+\\.\\d+);&quot;);</span><br><span class="line">        reIE.test(userAgent);</span><br><span class="line">        var fIEVersion = parseFloat(RegExp[&quot;$1&quot;]);</span><br><span class="line">        if(fIEVersion == 7) &#123;</span><br><span class="line">            return 7;</span><br><span class="line">        &#125; else if(fIEVersion == 8) &#123;</span><br><span class="line">            return 8;</span><br><span class="line">        &#125; else if(fIEVersion == 9) &#123;</span><br><span class="line">            return 9;</span><br><span class="line">        &#125; else if(fIEVersion == 10) &#123;</span><br><span class="line">            return 10;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return 6;//IE版本&lt;=7</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125; else if(isEdge) &#123;</span><br><span class="line">        return &apos;edge&apos;; //edge</span><br><span class="line">    &#125; else if(isIE11) &#123;</span><br><span class="line">        return 11; //IE11  </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return -1; //不是IE浏览器</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/06/15/Git更改本地和远程分支的名称/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1208,7 +1367,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1230,7 +1389,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -1291,7 +1450,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共10.6k字</span>
+  <span class="post-count">博客全站共10.7k字</span>
 </div>
         
 
