@@ -314,7 +314,8 @@
       
         
           
-            
+            <p>apply 的实现跟 call 类，思路参考 <a href="https://b1gf4cec4t.github.io/2019/12/26/%E6%89%8B%E5%86%99%E4%BB%A3%E7%A0%81%E2%80%94%E2%80%94%E5%AE%9E%E7%8E%B0call/" title="手写代码——实现call">手写代码——实现call</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype._apply = function(context, arr) &#123;</span><br><span class="line">    var context = Object(context) || window;</span><br><span class="line">    context.fn = this;</span><br><span class="line"></span><br><span class="line">    var result;</span><br><span class="line">    if (!arr) &#123;</span><br><span class="line">        result = context.fn();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        var args = [];</span><br><span class="line">        for (var i = 0, len = arr.length; i &lt; len; i++) &#123;</span><br><span class="line">            args.push(&quot;arr[&quot; + i + &quot;]&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        result = eval(&quot;context.fn(&quot; + args + &quot;)&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    delete context.fn;</span><br><span class="line">    return result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -2043,7 +2044,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共10.8k字</span>
+  <span class="post-count">博客全站共10.9k字</span>
 </div>
         
 
