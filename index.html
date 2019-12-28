@@ -243,6 +243,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/28/手写代码——实现深克隆/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fiona">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B1gF4ceC4t">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/28/手写代码——实现深克隆/" itemprop="url">手写代码——实现深克隆</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-28T15:22:41+08:00">
+                2019-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/" itemprop="url" rel="index">
+                    <span itemprop="name">Technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="乞丐版"><a href="#乞丐版" class="headerlink" title="乞丐版"></a>乞丐版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const newObj = JSON.parse(JSON.stringify(oldObj));</span><br></pre></td></tr></table></figure>
+<h2 id="简单版"><a href="#简单版" class="headerlink" title="简单版"></a>简单版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function deepCopy(obj)&#123;</span><br><span class="line">    let result;</span><br><span class="line">    //判断是否是简单数据类型，</span><br><span class="line">    if(typeof obj === &quot;object&quot;)&#123;</span><br><span class="line">        //复杂数据类型</span><br><span class="line">        result = obj.constructor == Array ? [] : &#123;&#125;;</span><br><span class="line">        for(let i in obj)&#123;</span><br><span class="line">            result[i] = typeof obj[i] == &quot;object&quot; ? deepCopy(obj[i]) : obj[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        //简单数据类型 直接赋值</span><br><span class="line">        result = obj;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="基础版"><a href="#基础版" class="headerlink" title="基础版"></a>基础版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * deep clone</span><br><span class="line"> * @param  &#123;[type]&#125; parent object 需要进行克隆的对象</span><br><span class="line"> * @return &#123;[type]&#125;        深克隆后的对象</span><br><span class="line"> */</span><br><span class="line">const clone = parent =&gt; &#123;</span><br><span class="line">    // 判断类型</span><br><span class="line">    const isType = (obj, type) =&gt; &#123;</span><br><span class="line">        if (typeof obj !== &quot;object&quot;) return false;</span><br><span class="line">        const typeString = Object.prototype.toString.call(obj);</span><br><span class="line">        return typeString === &quot;[object &quot; + type +&quot;]&quot;;</span><br><span class="line">        let flag;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    // 处理正则</span><br><span class="line">    const getRegExp = re =&gt; &#123;</span><br><span class="line">        var flags = &quot;&quot;;</span><br><span class="line">        if (re.global) flags += &quot;g&quot;;</span><br><span class="line">        if (re.ignoreCase) flags += &quot;i&quot;;</span><br><span class="line">        if (re.multiline) flags += &quot;m&quot;;</span><br><span class="line">        return flags;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    // 维护两个储存循环引用的数组</span><br><span class="line">    const parents = [];</span><br><span class="line">    const children = [];</span><br><span class="line"></span><br><span class="line">    const _clone = parent =&gt; &#123;</span><br><span class="line">        if (parent === null) return null;</span><br><span class="line">        if (typeof parent !== &quot;object&quot;) return parent;</span><br><span class="line"></span><br><span class="line">        let child, proto;</span><br><span class="line"></span><br><span class="line">        if (isType(parent, &quot;Array&quot;)) &#123;</span><br><span class="line">            // 对数组做特殊处理</span><br><span class="line">            child = [];</span><br><span class="line">        &#125; else if (isType(parent, &quot;RegExp&quot;)) &#123;</span><br><span class="line">            // 对正则对象做特殊处理</span><br><span class="line">            child = new RegExp(parent.source, getRegExp(parent));</span><br><span class="line">        &#125; else if (isType(parent, &quot;Date&quot;)) &#123;</span><br><span class="line">            // 对Date对象做特殊处理</span><br><span class="line">            child = new Date(parent.getTime());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 处理对象原型</span><br><span class="line">            proto = Object.getPrototypeOf(parent);</span><br><span class="line">            // 利用Object.create切断原型链</span><br><span class="line">            child = Object.create(proto);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 处理循环引用</span><br><span class="line">        const index = parents.indexOf(parent);</span><br><span class="line"></span><br><span class="line">        if (index != -1) &#123;</span><br><span class="line">            // 如果父数组存在本对象,说明之前已经被引用过,直接返回此对象</span><br><span class="line">            return children[index];</span><br><span class="line">        &#125;</span><br><span class="line">        parents.push(parent);</span><br><span class="line">        children.push(child);</span><br><span class="line"></span><br><span class="line">        for (let i in parent) &#123;</span><br><span class="line">            // 递归</span><br><span class="line">            child[i] = _clone(parent[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return child;</span><br><span class="line">    &#125;;</span><br><span class="line">    return _clone(parent);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/28/手写代码——实现防抖函数（debounce）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1813,165 +1968,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/11/22/通过色值判断深浅色/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fiona">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="B1gF4ceC4t">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/11/22/通过色值判断深浅色/" itemprop="url">通过色值判断深浅色</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-22T10:32:50+08:00">
-                2019-11-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/" itemprop="url" rel="index">
-                    <span itemprop="name">Technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/FontEnd/" itemprop="url" rel="index">
-                    <span itemprop="name">FontEnd</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import rgb from &quot;rgb&quot;;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">export const isDeepColor = color =&gt; &#123;</span><br><span class="line">    let isDeep = false;</span><br><span class="line">    const rgbColor = rgb(color);</span><br><span class="line">    const [R, G, B, A] = rgbColor</span><br><span class="line">        .replace(&quot;rgb(&quot;, &quot;&quot;)</span><br><span class="line">        .replace(&quot;rgba(&quot;, &quot;&quot;)</span><br><span class="line">        .replace(&quot;)&quot;, &quot;&quot;)</span><br><span class="line">        .split(&quot;,&quot;);</span><br><span class="line">    const Y = 0.299 * R + 0.587 * G + 0.114 * B;</span><br><span class="line">    if (Y &lt; 192 &amp;&amp; (!A || Number(A) &gt; 0.5)) &#123;</span><br><span class="line">        isDeep = true;</span><br><span class="line">    &#125;</span><br><span class="line">    return isDeep;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2017,7 +2018,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2039,7 +2040,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -2100,7 +2101,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共11.4k字</span>
+  <span class="post-count">博客全站共11.8k字</span>
 </div>
         
 

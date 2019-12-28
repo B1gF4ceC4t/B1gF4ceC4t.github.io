@@ -82,7 +82,7 @@
 
 
 
-  <meta name="keywords" content="React,组件按需加载," />
+  <meta name="keywords" content="手写代码,深克隆," />
 
 
 
@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="React组件按需加载方案 思路使用高阶组件实现组件的按需加载 实现代码示例定义asyncComponent12345678910111213141516171819202122import React, &amp;#123; Component &amp;#125; from &amp;apos;react&amp;apos;;export default function asyncComponent(importCompo">
-<meta name="keywords" content="React,组件按需加载">
+<meta name="description" content="乞丐版1const newObj = JSON.parse(JSON.stringify(oldObj)); 简单版123456789101112131415function deepCopy(obj)&amp;#123;    let result;    //判断是否是简单数据类型，    if(typeof obj === &amp;quot;object&amp;quot;)&amp;#123;        //复杂数">
+<meta name="keywords" content="手写代码,深克隆">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React组件按需加载方案">
-<meta property="og:url" content="https://b1gf4cec4t.github.io/2018/07/12/React组件按需加载方案/index.html">
+<meta property="og:title" content="手写代码——实现深克隆">
+<meta property="og:url" content="https://b1gf4cec4t.github.io/2019/12/28/手写代码——实现深克隆/index.html">
 <meta property="og:site_name" content="B1gF4ceC4t">
-<meta property="og:description" content="React组件按需加载方案 思路使用高阶组件实现组件的按需加载 实现代码示例定义asyncComponent12345678910111213141516171819202122import React, &amp;#123; Component &amp;#125; from &amp;apos;react&amp;apos;;export default function asyncComponent(importCompo">
+<meta property="og:description" content="乞丐版1const newObj = JSON.parse(JSON.stringify(oldObj)); 简单版123456789101112131415function deepCopy(obj)&amp;#123;    let result;    //判断是否是简单数据类型，    if(typeof obj === &amp;quot;object&amp;quot;)&amp;#123;        //复杂数">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-13T11:15:23.633Z">
+<meta property="og:updated_time" content="2019-12-28T07:42:54.045Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React组件按需加载方案">
-<meta name="twitter:description" content="React组件按需加载方案 思路使用高阶组件实现组件的按需加载 实现代码示例定义asyncComponent12345678910111213141516171819202122import React, &amp;#123; Component &amp;#125; from &amp;apos;react&amp;apos;;export default function asyncComponent(importCompo">
+<meta name="twitter:title" content="手写代码——实现深克隆">
+<meta name="twitter:description" content="乞丐版1const newObj = JSON.parse(JSON.stringify(oldObj)); 简单版123456789101112131415function deepCopy(obj)&amp;#123;    let result;    //判断是否是简单数据类型，    if(typeof obj === &amp;quot;object&amp;quot;)&amp;#123;        //复杂数">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://b1gf4cec4t.github.io/2018/07/12/React组件按需加载方案/"/>
+  <link rel="canonical" href="https://b1gf4cec4t.github.io/2019/12/28/手写代码——实现深克隆/"/>
 
 
 
 
 
-  <title>React组件按需加载方案 | B1gF4ceC4t</title>
+  <title>手写代码——实现深克隆 | B1gF4ceC4t</title>
   
 
 
@@ -247,7 +247,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2018/07/12/React组件按需加载方案/">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/28/手写代码——实现深克隆/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fiona">
@@ -264,7 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">React组件按需加载方案</h1>
+          <h1 class="post-title" itemprop="name headline">手写代码——实现深克隆</h1>
         
 
         <div class="post-meta">
@@ -276,8 +276,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T10:29:48+08:00">
-                2018-07-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-28T15:22:41+08:00">
+                2019-12-28
               </time>
             
 
@@ -310,8 +310,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
+                  <a href="/categories/Technology/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
                   </a>
                 </span>
 
@@ -347,10 +347,9 @@
       
 
       
-        <h1 id="React组件按需加载方案"><a href="#React组件按需加载方案" class="headerlink" title="React组件按需加载方案"></a>React组件按需加载方案</h1><hr>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>使用高阶组件实现组件的按需加载</p>
-<h2 id="实现代码示例"><a href="#实现代码示例" class="headerlink" title="实现代码示例"></a>实现代码示例</h2><h3 id="定义asyncComponent"><a href="#定义asyncComponent" class="headerlink" title="定义asyncComponent"></a>定义asyncComponent</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">export default function asyncComponent(importComponent) &#123;</span><br><span class="line">  class AsyncComponent extends Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">      super(props);</span><br><span class="line">      this.state = &#123;</span><br><span class="line">        component: null</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    async componentDidMount() &#123;</span><br><span class="line">      const &#123; default: component &#125; = await importComponent();</span><br><span class="line">      this.setState(&#123;component&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">      const C = this.state.component;</span><br><span class="line">      return C ? &lt;C &#123;...this.props&#125; /&gt; : null;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return AsyncComponent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="使用asyncComponent实现按需加载"><a href="#使用asyncComponent实现按需加载" class="headerlink" title="使用asyncComponent实现按需加载"></a>使用asyncComponent实现按需加载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const Example = asyncComponent(() =&gt; import(&apos;./example.js&apos;));</span><br></pre></td></tr></table></figure>
+        <h2 id="乞丐版"><a href="#乞丐版" class="headerlink" title="乞丐版"></a>乞丐版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const newObj = JSON.parse(JSON.stringify(oldObj));</span><br></pre></td></tr></table></figure>
+<h2 id="简单版"><a href="#简单版" class="headerlink" title="简单版"></a>简单版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function deepCopy(obj)&#123;</span><br><span class="line">    let result;</span><br><span class="line">    //判断是否是简单数据类型，</span><br><span class="line">    if(typeof obj === &quot;object&quot;)&#123;</span><br><span class="line">        //复杂数据类型</span><br><span class="line">        result = obj.constructor == Array ? [] : &#123;&#125;;</span><br><span class="line">        for(let i in obj)&#123;</span><br><span class="line">            result[i] = typeof obj[i] == &quot;object&quot; ? deepCopy(obj[i]) : obj[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        //简单数据类型 直接赋值</span><br><span class="line">        result = obj;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="基础版"><a href="#基础版" class="headerlink" title="基础版"></a>基础版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * deep clone</span><br><span class="line"> * @param  &#123;[type]&#125; parent object 需要进行克隆的对象</span><br><span class="line"> * @return &#123;[type]&#125;        深克隆后的对象</span><br><span class="line"> */</span><br><span class="line">const clone = parent =&gt; &#123;</span><br><span class="line">    // 判断类型</span><br><span class="line">    const isType = (obj, type) =&gt; &#123;</span><br><span class="line">        if (typeof obj !== &quot;object&quot;) return false;</span><br><span class="line">        const typeString = Object.prototype.toString.call(obj);</span><br><span class="line">        return typeString === &quot;[object &quot; + type +&quot;]&quot;;</span><br><span class="line">        let flag;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    // 处理正则</span><br><span class="line">    const getRegExp = re =&gt; &#123;</span><br><span class="line">        var flags = &quot;&quot;;</span><br><span class="line">        if (re.global) flags += &quot;g&quot;;</span><br><span class="line">        if (re.ignoreCase) flags += &quot;i&quot;;</span><br><span class="line">        if (re.multiline) flags += &quot;m&quot;;</span><br><span class="line">        return flags;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    // 维护两个储存循环引用的数组</span><br><span class="line">    const parents = [];</span><br><span class="line">    const children = [];</span><br><span class="line"></span><br><span class="line">    const _clone = parent =&gt; &#123;</span><br><span class="line">        if (parent === null) return null;</span><br><span class="line">        if (typeof parent !== &quot;object&quot;) return parent;</span><br><span class="line"></span><br><span class="line">        let child, proto;</span><br><span class="line"></span><br><span class="line">        if (isType(parent, &quot;Array&quot;)) &#123;</span><br><span class="line">            // 对数组做特殊处理</span><br><span class="line">            child = [];</span><br><span class="line">        &#125; else if (isType(parent, &quot;RegExp&quot;)) &#123;</span><br><span class="line">            // 对正则对象做特殊处理</span><br><span class="line">            child = new RegExp(parent.source, getRegExp(parent));</span><br><span class="line">        &#125; else if (isType(parent, &quot;Date&quot;)) &#123;</span><br><span class="line">            // 对Date对象做特殊处理</span><br><span class="line">            child = new Date(parent.getTime());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 处理对象原型</span><br><span class="line">            proto = Object.getPrototypeOf(parent);</span><br><span class="line">            // 利用Object.create切断原型链</span><br><span class="line">            child = Object.create(proto);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 处理循环引用</span><br><span class="line">        const index = parents.indexOf(parent);</span><br><span class="line"></span><br><span class="line">        if (index != -1) &#123;</span><br><span class="line">            // 如果父数组存在本对象,说明之前已经被引用过,直接返回此对象</span><br><span class="line">            return children[index];</span><br><span class="line">        &#125;</span><br><span class="line">        parents.push(parent);</span><br><span class="line">        children.push(child);</span><br><span class="line"></span><br><span class="line">        for (let i in parent) &#123;</span><br><span class="line">            // 递归</span><br><span class="line">            child[i] = _clone(parent[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return child;</span><br><span class="line">    &#125;;</span><br><span class="line">    return _clone(parent);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -368,9 +367,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/React/" rel="tag"># React</a>
+            <a href="/tags/手写代码/" rel="tag"># 手写代码</a>
           
-            <a href="/tags/组件按需加载/" rel="tag"># 组件按需加载</a>
+            <a href="/tags/深克隆/" rel="tag"># 深克隆</a>
           
         </div>
       
@@ -383,8 +382,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/11/immutability-helper学习笔记/" rel="next" title="immutability-helper 学习笔记">
-                <i class="fa fa-chevron-left"></i> immutability-helper 学习笔记
+              <a href="/2019/12/28/手写代码——实现防抖函数（debounce）/" rel="next" title="手写代码——实现防抖节流函数">
+                <i class="fa fa-chevron-left"></i> 手写代码——实现防抖节流函数
               </a>
             
           </div>
@@ -392,10 +391,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/18/create-react-app项目配合antd加载其脚本和样式的配置/" rel="prev" title="create-react-app项目配合antd加载其脚本和样式的配置">
-                create-react-app项目配合antd加载其脚本和样式的配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -527,7 +522,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React组件按需加载方案"><span class="nav-number">1.</span> <span class="nav-text">React组件按需加载方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现代码示例"><span class="nav-number">1.2.</span> <span class="nav-text">实现代码示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义asyncComponent"><span class="nav-number">1.2.1.</span> <span class="nav-text">定义asyncComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用asyncComponent实现按需加载"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用asyncComponent实现按需加载</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#乞丐版"><span class="nav-number">1.</span> <span class="nav-text">乞丐版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单版"><span class="nav-number">2.</span> <span class="nav-text">简单版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础版"><span class="nav-number">3.</span> <span class="nav-text">基础版</span></a></li></ol></div>
             
 
           </div>
