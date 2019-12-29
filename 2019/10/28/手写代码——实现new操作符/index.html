@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="1234567891011121314function _new(func) &amp;#123;    let newObj = &amp;#123;&amp;#125;;    if (func.prototpye !== null) &amp;#123;        newObj.__proto__ = func.prototype;    &amp;#125;    const res = func.apply(newObj,">
+<meta name="description" content="new 操作符做了这些事：  它创建了一个全新的对象 它会被执行 [[Prototype]]（也就是 __proto__ ）链接 它使 this 指向新创建的对象 通过 new 创建的每个对象将最终被 [[Prototype]] 链接到这个函数的 prototype 对象上 如果函数没有返回对象类型 Object(包含 Functoin, Array, Date, RegExg, Error)，那">
 <meta name="keywords" content="手写代码,new">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手写代码——实现new操作符">
 <meta property="og:url" content="https://b1gf4cec4t.github.io/2019/10/28/手写代码——实现new操作符/index.html">
 <meta property="og:site_name" content="B1gF4ceC4t">
-<meta property="og:description" content="1234567891011121314function _new(func) &amp;#123;    let newObj = &amp;#123;&amp;#125;;    if (func.prototpye !== null) &amp;#123;        newObj.__proto__ = func.prototype;    &amp;#125;    const res = func.apply(newObj,">
+<meta property="og:description" content="new 操作符做了这些事：  它创建了一个全新的对象 它会被执行 [[Prototype]]（也就是 __proto__ ）链接 它使 this 指向新创建的对象 通过 new 创建的每个对象将最终被 [[Prototype]] 链接到这个函数的 prototype 对象上 如果函数没有返回对象类型 Object(包含 Functoin, Array, Date, RegExg, Error)，那">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-11-22T02:42:41.694Z">
+<meta property="og:updated_time" content="2019-12-29T03:11:11.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手写代码——实现new操作符">
-<meta name="twitter:description" content="1234567891011121314function _new(func) &amp;#123;    let newObj = &amp;#123;&amp;#125;;    if (func.prototpye !== null) &amp;#123;        newObj.__proto__ = func.prototype;    &amp;#125;    const res = func.apply(newObj,">
+<meta name="twitter:description" content="new 操作符做了这些事：  它创建了一个全新的对象 它会被执行 [[Prototype]]（也就是 __proto__ ）链接 它使 this 指向新创建的对象 通过 new 创建的每个对象将最终被 [[Prototype]] 链接到这个函数的 prototype 对象上 如果函数没有返回对象类型 Object(包含 Functoin, Array, Date, RegExg, Error)，那">
 
 
 
@@ -347,7 +347,15 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function _new(func) &#123;</span><br><span class="line">    let newObj = &#123;&#125;;</span><br><span class="line">    if (func.prototpye !== null) &#123;</span><br><span class="line">        newObj.__proto__ = func.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    const res = func.apply(newObj, Array.prototype.slice.call(arguments, 1));</span><br><span class="line">    if (</span><br><span class="line">        (typeof res === &quot;object&quot; || typeof res === &quot;function&quot;) &amp;&amp;</span><br><span class="line">        res !== null</span><br><span class="line">    ) &#123;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    return newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>new 操作符做了这些事：</p>
+<ul>
+<li>它创建了一个全新的对象</li>
+<li>它会被执行 <code>[[Prototype]]</code>（也就是 <code>__proto__</code> ）链接</li>
+<li>它使 <code>this</code> 指向新创建的对象</li>
+<li>通过 new 创建的每个对象将最终被 <code>[[Prototype]]</code> 链接到这个函数的 <code>prototype</code> 对象上</li>
+<li>如果函数没有返回对象类型 Object(包含 Functoin, Array, Date, RegExg, Error)，那么 new 表达式中的函数调用将返回该对象引用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function _new(func) &#123;</span><br><span class="line">    let newObj = &#123;&#125;;</span><br><span class="line">    if (func.prototpye !== null) &#123;</span><br><span class="line">        newObj.__proto__ = func.prototype;</span><br><span class="line">    &#125;</span><br><span class="line">    const res = func.apply(newObj, Array.prototype.slice.call(arguments, 1));</span><br><span class="line">    if (</span><br><span class="line">        (typeof res === &quot;object&quot; || typeof res === &quot;function&quot;) &amp;&amp;</span><br><span class="line">        res !== null</span><br><span class="line">    ) &#123;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">    return newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const obj = _new(Func, 1, 2); //const obj = new Func(1, 2);</span><br></pre></td></tr></table></figure>
 
       
@@ -461,7 +469,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -483,7 +491,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -544,7 +552,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.5k字</span>
+  <span class="post-count">博客全站共14.4k字</span>
 </div>
         
 

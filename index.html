@@ -243,6 +243,439 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/29/手写代码——实现Promise-A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fiona">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B1gF4ceC4t">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/29/手写代码——实现Promise-A/" itemprop="url">手写代码——实现Promise/A+</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-29T16:49:17+08:00">
+                2019-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="标准版"><a href="#标准版" class="headerlink" title="标准版"></a>标准版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    module.exports = Promise</span><br><span class="line">&#125; catch (e) &#123;&#125;</span><br><span class="line"></span><br><span class="line">function Promise(executor) &#123;</span><br><span class="line">    var self = this;</span><br><span class="line"></span><br><span class="line">    self.status = &apos;pending&apos;;</span><br><span class="line">    self.onResolvedCallback = [];</span><br><span class="line">    self.onRejectedCallback = [];</span><br><span class="line"></span><br><span class="line">    function resolve(value) &#123;</span><br><span class="line">        if (value instanceof Promise) &#123;</span><br><span class="line">            return value.then(resolve, reject);</span><br><span class="line">        &#125;</span><br><span class="line">        setTimeout(function() &#123; // 异步执行所有的回调函数</span><br><span class="line">            if (self.status === &apos;pending&apos;) &#123;</span><br><span class="line">                self.status = &apos;resolved&apos;;</span><br><span class="line">                self.data = value;</span><br><span class="line">                for (var i = 0; i &lt; self.onResolvedCallback.length; i++) &#123;</span><br><span class="line">                    self.onResolvedCallback[i](value);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function reject(reason) &#123;</span><br><span class="line">        setTimeout(function() &#123; // 异步执行所有的回调函数</span><br><span class="line">            if (self.status === &apos;pending&apos;) &#123;</span><br><span class="line">                self.status = &apos;rejected&apos;;</span><br><span class="line">                self.data = reason;</span><br><span class="line">                for (var i = 0; i &lt; self.onRejectedCallback.length; i++) &#123;</span><br><span class="line">                    self.onRejectedCallback[i](reason);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">        executor(resolve, reject);</span><br><span class="line">    &#125; catch (reason) &#123;</span><br><span class="line">        reject(reason);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise.prototype.then = function(onResolved, onRejected) &#123;</span><br><span class="line">    var self = this;</span><br><span class="line">    var promise2;</span><br><span class="line">    onResolved = typeof onResolved === &apos;function&apos; ? onResolved : function(v) &#123; return v; &#125;</span><br><span class="line">    onRejected = typeof onRejected === &apos;function&apos; ? onRejected : function(r) &#123; throw r; &#125;</span><br><span class="line"></span><br><span class="line">    if (self.status === &apos;resolved&apos;) &#123;</span><br><span class="line">        // 如果promise1(此处即为this/self)的状态已经确定并且是resolved，我们调用onResolved</span><br><span class="line">        // 因为考虑到有可能throw，所以我们将其包在try/catch块里</span><br><span class="line">        return promise2 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                var x = onResolved(self.data);</span><br><span class="line">                if (x instanceof Promise) &#123; // 如果onResolved的返回值是一个Promise对象，直接取它的结果做为promise2的结果</span><br><span class="line">                    x.then(resolve, reject);</span><br><span class="line">                &#125;</span><br><span class="line">                resolve(x); // 否则，以它的返回值做为promise2的结果</span><br><span class="line">            &#125; catch (e) &#123;</span><br><span class="line">                reject(e); // 如果出错，以捕获到的错误做为promise2的结果</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 此处与前一个if块的逻辑几乎相同，区别在于所调用的是onRejected函数，就不再做过多解释</span><br><span class="line">    if (self.status === &apos;rejected&apos;) &#123;</span><br><span class="line">        return promise2 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                var x = onRejected(self.data);</span><br><span class="line">                if (x instanceof Promise) &#123;</span><br><span class="line">                    x.then(resolve, reject);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; catch (e) &#123;</span><br><span class="line">                reject(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (self.status === &apos;pending&apos;) &#123;</span><br><span class="line">        // 如果当前的Promise还处于pending状态，我们并不能确定调用onResolved还是onRejected，</span><br><span class="line">        // 只能等到Promise的状态确定后，才能确实如何处理。</span><br><span class="line">        // 所以我们需要把我们的两种情况的处理逻辑做为callback放入promise1(此处即this/self)的回调数组里</span><br><span class="line">        // 逻辑本身跟第一个if块内的几乎一致，此处不做过多解释</span><br><span class="line">        return promise2 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">            self.onResolvedCallback.push(function(value) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    var x = onResolved(self.data);</span><br><span class="line">                    if (x instanceof Promise) &#123;</span><br><span class="line">                        x.then(resolve, reject);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; catch (e) &#123;</span><br><span class="line">                    reject(e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            self.onRejectedCallback.push(function(reason) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    var x = onRejected(self.data);</span><br><span class="line">                    if (x instanceof Promise) &#123;</span><br><span class="line">                        x.then(resolve, reject);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; catch (e) &#123;</span><br><span class="line">                    reject(e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise.prototype.catch = function(onRejected) &#123;</span><br><span class="line">    return this.then(null, onRejected);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="完善版"><a href="#完善版" class="headerlink" title="完善版"></a>完善版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    module.exports = Promise</span><br><span class="line">&#125; catch (e) &#123;&#125;</span><br><span class="line"></span><br><span class="line">function Promise(executor) &#123;</span><br><span class="line">    var self = this;</span><br><span class="line"></span><br><span class="line">    self.status = &apos;pending&apos;;</span><br><span class="line">    self.onResolvedCallback = [];</span><br><span class="line">    self.onRejectedCallback = [];</span><br><span class="line"></span><br><span class="line">    function resolve(value) &#123;</span><br><span class="line">        if (value instanceof Promise) &#123;</span><br><span class="line">            return value.then(resolve, reject);</span><br><span class="line">        &#125;</span><br><span class="line">        setTimeout(function() &#123; // 异步执行所有的回调函数</span><br><span class="line">            if (self.status === &apos;pending&apos;) &#123;</span><br><span class="line">                self.status = &apos;resolved&apos;;</span><br><span class="line">                self.data = value;</span><br><span class="line">                for (var i = 0; i &lt; self.onResolvedCallback.length; i++) &#123;</span><br><span class="line">                    self.onResolvedCallback[i](value);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function reject(reason) &#123;</span><br><span class="line">        setTimeout(function() &#123; // 异步执行所有的回调函数</span><br><span class="line">            if (self.status === &apos;pending&apos;) &#123;</span><br><span class="line">                self.status = &apos;rejected&apos;;</span><br><span class="line">                self.data = reason;</span><br><span class="line">                for (var i = 0; i &lt; self.onRejectedCallback.length; i++) &#123;</span><br><span class="line">                    self.onRejectedCallback[i](reason);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">        executor(resolve, reject);</span><br><span class="line">    &#125; catch (reason) &#123;</span><br><span class="line">        reject(reason);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function resolvePromise(promise2, x, resolve, reject) &#123;</span><br><span class="line">    var then;</span><br><span class="line">    var thenCalledOrThrow = false;</span><br><span class="line"></span><br><span class="line">    if (promise2 === x) &#123;</span><br><span class="line">        return reject(new TypeError(&apos;Chaining cycle detected for promise!&apos;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (x instanceof Promise) &#123;</span><br><span class="line">        if (x.status === &apos;pending&apos;) &#123; //because x could resolved by a Promise Object</span><br><span class="line">            x.then(function(v) &#123;</span><br><span class="line">                resolvePromise(promise2, v, resolve, reject);</span><br><span class="line">            &#125;, reject);</span><br><span class="line">        &#125; else &#123; //but if it is resolved, it will never resolved by a Promise Object but a static value;</span><br><span class="line">            x.then(resolve, reject);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if ((x !== null) &amp;&amp; ((typeof x === &apos;object&apos;) || (typeof x === &apos;function&apos;))) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            then = x.then; //because x.then could be a getter</span><br><span class="line">            if (typeof then === &apos;function&apos;) &#123;</span><br><span class="line">                then.call(x, function rs(y) &#123;</span><br><span class="line">                    if (thenCalledOrThrow) return;</span><br><span class="line">                    thenCalledOrThrow = true;</span><br><span class="line">                    return resolvePromise(promise2, y, resolve, reject);</span><br><span class="line">                &#125;, function rj(r) &#123;</span><br><span class="line">                    if (thenCalledOrThrow) return;</span><br><span class="line">                    thenCalledOrThrow = true;</span><br><span class="line">                    return reject(r);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                resolve(x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            if (thenCalledOrThrow) return;</span><br><span class="line">            thenCalledOrThrow = true;</span><br><span class="line">            return reject(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        resolve(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise.prototype.then = function(onResolved, onRejected) &#123;</span><br><span class="line">    var self = this;</span><br><span class="line">    var promise2;</span><br><span class="line">    onResolved = typeof onResolved === &apos;function&apos; ? onResolved : function(v) &#123; return v; &#125;</span><br><span class="line">    onRejected = typeof onRejected === &apos;function&apos; ? onRejected : function(r) &#123; throw r; &#125;</span><br><span class="line"></span><br><span class="line">    if (self.status === &apos;resolved&apos;) &#123;</span><br><span class="line">        return promise2 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">            setTimeout(function() &#123; // 异步执行onResolved</span><br><span class="line">                try &#123;</span><br><span class="line">                    var x = onResolved(self.data);</span><br><span class="line">                    resolvePromise(promise2, x, resolve, reject);</span><br><span class="line">                &#125; catch (reason) &#123;</span><br><span class="line">                    reject(reason);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (self.status === &apos;rejected&apos;) &#123;</span><br><span class="line">        return promise2 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">            setTimeout(function() &#123; // 异步执行onRejected</span><br><span class="line">                try &#123;</span><br><span class="line">                    var x = onRejected(self.data);</span><br><span class="line">                    resolvePromise(promise2, x, resolve, reject);</span><br><span class="line">                &#125; catch (reason) &#123;</span><br><span class="line">                    reject(reason);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (self.status === &apos;pending&apos;) &#123;</span><br><span class="line">        // 这里之所以没有异步执行，是因为这些函数必然会被resolve或reject调用</span><br><span class="line">        // 而resolve或reject函数里的内容已是异步执行，构造函数里的定义</span><br><span class="line">        return promise2 = new Promise(function(resolve, reject) &#123;</span><br><span class="line">            self.onResolvedCallback.push(function(value) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    var x = onResolved(value);</span><br><span class="line">                    resolvePromise(promise2, x, resolve, reject);</span><br><span class="line">                &#125; catch (r) &#123;</span><br><span class="line">                    reject(r);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            self.onRejectedCallback.push(function(reason) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    var x = onRejected(reason);</span><br><span class="line">                    resolvePromise(promise2, x, resolve, reject);</span><br><span class="line">                &#125; catch (r) &#123;</span><br><span class="line">                    reject(r);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise.prototype.catch = function(onRejected) &#123;</span><br><span class="line">    return this.then(null, onRejected);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Promise.deferred = Promise.defer = function() &#123;</span><br><span class="line">    var dfd = &#123;&#125;;</span><br><span class="line">    dfd.promise = new Promise(function(resolve, reject) &#123;</span><br><span class="line">        dfd.resolve = resolve;</span><br><span class="line">        dfd.reject = reject;</span><br><span class="line">    &#125;);</span><br><span class="line">    return dfd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PromisePolyfill.all = function (promises) &#123;</span><br><span class="line">    return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        const result = [];</span><br><span class="line">        let cnt = 0;</span><br><span class="line">        for (let i = 0; i &lt; promises.length; ++i) &#123;</span><br><span class="line">            promises[i].then(value =&gt; &#123;</span><br><span class="line">                cnt++;</span><br><span class="line">                result[i] = value;</span><br><span class="line">                if (cnt === promises.length) resolve(result);</span><br><span class="line">            &#125;, reject);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PromisePolyfill.race = function (promises) &#123;</span><br><span class="line">    return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        for (let i = 0; i &lt; promises.length; ++i) &#123;</span><br><span class="line">            promises[i].then(resolve, reject);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/29/手写代码——实现bind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fiona">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B1gF4ceC4t">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/29/手写代码——实现bind/" itemprop="url">手写代码——实现bind</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-29T13:16:11+08:00">
+                2019-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/" itemprop="url" rel="index">
+                    <span itemprop="name">Technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>实现 bind 要做什么</p>
+<ul>
+<li>返回一个函数，绑定 this，传递预置参数</li>
+<li>bind 返回的函数可以作为构造函数使用。故作为构造函数时应使得 this 失效，但是传入的参数依然有效</li>
+</ul>
+<h2 id="简单版"><a href="#简单版" class="headerlink" title="简单版"></a>简单版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype._bind = function(context) &#123;</span><br><span class="line">    var self = this;</span><br><span class="line">    // 获取_bind函数从第二个参数到最后一个参数</span><br><span class="line">    var args = Array.prototype.slice.call(arguments, 1);</span><br><span class="line"></span><br><span class="line">    return function () &#123;</span><br><span class="line">        // 这个时候的arguments是指bind返回的函数传入的参数</span><br><span class="line">        var bindArgs = Array.prototype.slice.call(arguments);</span><br><span class="line">        return self.apply(context, args.concat(bindArgs));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="完善版"><a href="#完善版" class="headerlink" title="完善版"></a>完善版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// mdn的实现</span><br><span class="line">if (!Function.prototype.bind) &#123;</span><br><span class="line">    Function.prototype.bind = function(oThis) &#123;</span><br><span class="line">        if (typeof this !== &apos;function&apos;) &#123;</span><br><span class="line">            // closest thing possible to the ECMAScript 5</span><br><span class="line">            // internal IsCallable function</span><br><span class="line">            throw new TypeError(&apos;Function.prototype.bind - what is trying to be bound is not callable&apos;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        var aArgs   = Array.prototype.slice.call(arguments, 1),</span><br><span class="line">            fToBind = this,</span><br><span class="line">            fNOP    = function() &#123;&#125;,</span><br><span class="line">            fBound  = function() &#123;</span><br><span class="line">                // this instanceof fBound === true时，说明返回的fBound被当做new的构造函数调用</span><br><span class="line">                return fToBind.apply(this instanceof fBound</span><br><span class="line">                    ? this</span><br><span class="line">                    : oThis,</span><br><span class="line">                    // 获取调用时(fBound)的传参.bind 返回的函数入参往往是这么传递的</span><br><span class="line">                    aArgs.concat(Array.prototype.slice.call(arguments)));</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">        // 维护原型关系</span><br><span class="line">        if (this.prototype) &#123;</span><br><span class="line">            // Function.prototype doesn&apos;t have a prototype property</span><br><span class="line">            fNOP.prototype = this.prototype;</span><br><span class="line">        &#125;</span><br><span class="line">        // 下行的代码使fBound.prototype是fNOP的实例，因此</span><br><span class="line">        // 返回的fBound若作为new的构造函数，new生成的新对象作为this传入fBound，新对象的__proto__就是fNOP的实例</span><br><span class="line">        fBound.prototype = new fNOP();</span><br><span class="line"></span><br><span class="line">        return fBound;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/29/手写代码——实现instanceOf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fiona">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B1gF4ceC4t">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/29/手写代码——实现instanceOf/" itemprop="url">手写代码——实现instanceOf</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-29T10:49:48+08:00">
+                2019-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/" itemprop="url" rel="index">
+                    <span itemprop="name">Technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 模拟 instanceof</span><br><span class="line">function instance_of(L, R) &#123;</span><br><span class="line">    // L 表示左表达式，R 表示右表达式</span><br><span class="line">    var O = R.prototype; // 取 R 的显示原型</span><br><span class="line">    L = L.__proto__; // 取 L 的隐式原型</span><br><span class="line">    while (true) &#123;</span><br><span class="line">        if (L === null) return false;</span><br><span class="line">        if (O === L)</span><br><span class="line">            // 这里重点：当 O 严格等于 L 时，返回 true</span><br><span class="line">            return true;</span><br><span class="line">        L = L.__proto__;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/28/手写代码——实现EventEmeitter-event-bus/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1377,525 +1810,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/12/判断图片是否能正常加载/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fiona">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="B1gF4ceC4t">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/12/判断图片是否能正常加载/" itemprop="url">判断图片是否能正常加载</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-12T11:25:39+08:00">
-                2019-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/" itemprop="url" rel="index">
-                    <span itemprop="name">Technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/FontEnd/" itemprop="url" rel="index">
-                    <span itemprop="name">FontEnd</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="判断图片是否能正常加载"><a href="#判断图片是否能正常加载" class="headerlink" title="判断图片是否能正常加载"></a>判断图片是否能正常加载</h2><p>需求：为图片控件设置 url，若 url 不能成功获取到图片，使用默认图片提示用户图片异常。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const DEFAULT_IMG = &quot;/xxxxxxx/default.svg&quot;;</span><br><span class="line">const imgExists = url =&gt;</span><br><span class="line">    var img = new Image();</span><br><span class="line">    img.src = url;</span><br><span class="line">    return img.width &gt; 0 &amp;&amp; img.height &gt; 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过 <code>new Image()</code> 加载图片，通过判断图片宽高来判断图片是否能正常加载。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/10/字符串长度判断（中英文区分）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fiona">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="B1gF4ceC4t">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/10/字符串长度判断（中英文区分）/" itemprop="url">字符串长度判断（中英文区分）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-10T13:59:47+08:00">
-                2019-12-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/" itemprop="url" rel="index">
-                    <span itemprop="name">Technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const getCharacterLength = character =&gt; character.replace(/[^\x00-\xff]/g, &quot;**&quot;).length;</span><br></pre></td></tr></table></figure>
-<p><code>[^\x00-\xff]</code> 表示匹配双字节字符，如上正则将汉字等双字节字符的替换为 2 个单字节字符，这样就是区分了中英文字、全角半角符号等情况的统计结果。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/04/性能优化——关于React（持续更新）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fiona">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="B1gF4ceC4t">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/04/性能优化——关于React（持续更新）/" itemprop="url">性能优化——关于React（持续更新）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-04T10:31:10+08:00">
-                2019-12-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/" itemprop="url" rel="index">
-                    <span itemprop="name">Technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/FontEnd/" itemprop="url" rel="index">
-                    <span itemprop="name">FontEnd</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="性能优化——关于-React"><a href="#性能优化——关于-React" class="headerlink" title="性能优化——关于 React"></a>性能优化——关于 React</h1><hr>
-<h2 id="2019-12-04-简化-props"><a href="#2019-12-04-简化-props" class="headerlink" title="2019.12.04 - 简化 props"></a>2019.12.04 - 简化 props</h2><p>如果一个组件的 props 太复杂，也许一个不影响组件渲染结果的属性改变也会导致组件重新 render。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;List&gt;</span><br><span class="line">    &#123;list.map(item =&gt; &lt;ListItem key=&#123;item.id&#125; item=&#123;item&#125;/&gt;)&#125;</span><br><span class="line">&lt;/List&gt;</span><br></pre></td></tr></table></figure>
-<p>如上 <code>ListItem</code> 组件的作用如果仅仅是展示 item.name，但将整个 item 作为 props 传递，如果 item 的其他不相关的属性发生了改变，会导致 <code>ListItem</code> 做无用的 render。</p>
-<p>选用最准确、影响性最针对最有效的 props，可以极大的减少组件无用 render 的次数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;List&gt;</span><br><span class="line">    &#123;list.map(item =&gt; &lt;ListItem key=&#123;item.id&#125; currentId=&#123;item.id&#125; activeId=&#123;activeId&#125;/&gt;)&#125;</span><br><span class="line">&lt;/List&gt;</span><br></pre></td></tr></table></figure>
-<p>如上 <code>ListItem</code> 组件可能期望能对激活项增加特殊样式，但把 activeId 作为 props，当 activeId 改变时会导致列表里每一项重新 render。更好的方式应该是传递一个布尔值 active，这样最多也只有两项更新。</p>
-<hr>
-<h2 id="2019-12-04-避免使用箭头函数形式的事件处理器"><a href="#2019-12-04-避免使用箭头函数形式的事件处理器" class="headerlink" title="2019.12.04 - 避免使用箭头函数形式的事件处理器"></a>2019.12.04 - 避免使用箭头函数形式的事件处理器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ComplexComponent onClick=&#123;e =&gt; onClick(e.id)&#125; otherProps=&#123;values&#125; /&gt;</span><br></pre></td></tr></table></figure>
-<p>假设 <code>ComplexComponent</code> 是一个复杂的 <code>PureComponent</code>, 这里使用箭头函数，这会导致每次组件的重新渲染都创建新的事件处理程序。</p>
-<hr>
-<h2 id="2019-12-10-React-PureComponent"><a href="#2019-12-10-React-PureComponent" class="headerlink" title="2019.12.10 - React.PureComponent"></a>2019.12.10 - React.PureComponent</h2><p><code>React.PureComponent</code> 与 <code>React.Component</code> 很相似。两者的区别在于 <code>React.Component</code> 并未实现 <code>shouldComponentUpdate()</code>，而 <code>React.PureComponent</code> 中以浅层对比 prop 和 state 的方式来实现了该函数。</p>
-<p>如果赋予 React 组件相同的 props 和 state，render() 函数会渲染相同的内容，那么在某些情况下使用 <code>React.PureComponent</code> 可提高性能。</p>
-<blockquote>
-<p>⚠️<br><code>React.PureComponent</code> 中的 <code>shouldComponentUpdate()</code> 仅作对象的<strong>浅层比较</strong>。如果对象中包含复杂的数据结构，则有可能因为无法检查深层的差别，产生错误的比对结果。仅在你的 props 和 state 较为简单时，才使用 <code>React.PureComponent</code>，或者在深层数据结构发生变化时调用 <code>forceUpdate()</code> 来确保组件被正确地更新。你也可以考虑使用 immutable 对象加速嵌套数据的比较。<br>此外，<code>React.PureComponent</code> 中的 <code>shouldComponentUpdate()</code> 将跳过所有子组件树的 prop 更新。因此，请确保所有子组件也都是“纯”的组件。</p>
-</blockquote>
-<hr>
-<h2 id="2019-12-10-shouldComponentUpdate"><a href="#2019-12-10-shouldComponentUpdate" class="headerlink" title="2019.12.10 - shouldComponentUpdate"></a>2019.12.10 - shouldComponentUpdate</h2><p>React 构建并维护了一套内部的 UI 渲染描述。它包含了来自你的组件返回的 React 元素。该描述使得 React 避免创建 DOM 节点以及没有必要的节点访问，因为 DOM 操作相对于 JavaScript 对象操作更慢。虽然有时候它被称为“虚拟 DOM”，但是它在 React Native 中拥有相同的工作原理。</p>
-<p>当一个组件的 props 或 state 变更，React 会将最新返回的元素与之前渲染的元素进行对比，以此决定是否有必要更新真实的 DOM。当它们不相同时，React 会更新该 DOM。</p>
-<p>即使 React 只更新改变了的 DOM 节点，重新渲染仍然花费了一些时间。在大部分情况下它并不是问题，不过如果它已经慢到让人注意了，你可以通过覆盖生命周期方法 <code>shouldComponentUpdate</code> 来进行提速。该方法会在重新渲染前被触发。其默认实现总是返回 true，让 React 执行更新：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果你知道在什么情况下你的组件不需要更新，你可以在 <code>shouldComponentUpdate</code> 中返回 false 来跳过整个渲染过程。其包括该组件的 render 调用以及之后的操作。</p>
-<p>在大部分情况下，你可以继承 <code>React.PureComponent</code> 以代替手写 <code>shouldComponentUpdate()</code>。它用当前与之前 props 和 state 的浅比较覆写了 <code>shouldComponentUpdate()</code> 的实现。</p>
-<hr>
-<h2 id="2019-12-10-React-memo"><a href="#2019-12-10-React-memo" class="headerlink" title="2019.12.10 - React.memo"></a>2019.12.10 - React.memo</h2><p><code>React.memo</code> 为高阶组件。它与 <code>React.PureComponent</code> 非常相似，但它适用于函数组件，但不适用于 class 组件。</p>
-<p>如果你的函数组件在给定相同 props 的情况下渲染相同的结果，那么你可以通过将其包装在 <code>React.memo</code> 中调用，以此通过记忆组件渲染结果的方式来提高组件的性能表现。这意味着在这种情况下，React 将跳过渲染组件的操作并直接复用最近一次渲染的结果。</p>
-<p><strong>默认情况下其只会对复杂对象做浅层对比，如果你想要控制对比过程，那么请将自定义的比较函数通过第二个参数传入来实现。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function MyComponent(props) &#123;</span><br><span class="line">  /* 使用 props 渲染 */</span><br><span class="line">&#125;</span><br><span class="line">function areEqual(prevProps, nextProps) &#123;</span><br><span class="line">  /*</span><br><span class="line">  如果把 nextProps 传入 render 方法的返回结果与</span><br><span class="line">  将 prevProps 传入 render 方法的返回结果一致则返回 true，</span><br><span class="line">  否则返回 false</span><br><span class="line">  */</span><br><span class="line">&#125;</span><br><span class="line">export default React.memo(MyComponent, areEqual);</span><br></pre></td></tr></table></figure>
-<p>此方法仅作为<strong>性能优化</strong>的方式而存在。但请不要依赖它来“阻止”渲染，因为这会产生 bug。</p>
-<blockquote>
-<p>⚠️<br>与 class 组件中 <code>shouldComponentUpdate()</code> 方法不同的是，如果 props 相等，areEqual 会返回 true；如果 props 不相等，则返回 false。这与 <code>shouldComponentUpdate</code> 方法的返回值相反。</p>
-</blockquote>
-<hr>
-<h2 id="2019-12-10-React-useMemo"><a href="#2019-12-10-React-useMemo" class="headerlink" title="2019.12.10 - React.useMemo"></a>2019.12.10 - React.useMemo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const memoizedValue = useMemo(() =&gt; computeExpensiveValue(a, b), [a, b]);</span><br></pre></td></tr></table></figure>
-<p>返回一个 memoized 值。</p>
-<p>把“创建”函数和依赖项数组作为参数传入 <code>useMemo</code>，它仅会在某个依赖项改变时才重新计算 memoized 值。<strong>这种优化有助于避免在每次渲染时都进行高开销的计算</strong>。</p>
-<p>记住，传入 useMemo 的函数会在渲染期间执行。请不要在这个函数内部执行与渲染无关的操作，诸如副作用这类的操作属于 <code>useEffect</code> 的适用范畴，而不是 <code>useMemo</code>。</p>
-<p>如果没有提供依赖项数组，<code>useMemo</code> 在每次渲染时都会计算新的值。</p>
-<p><strong>你可以把 <code>useMemo</code> 作为性能优化的手段，但不要把它当成语义上的保证。</strong>将来，React 可能会选择“遗忘”以前的一些 memoized 值，并在下次渲染时重新计算它们，比如为离屏组件释放内存。先编写在没有 <code>useMemo</code> 的情况下也可以执行的代码 —— 之后再在你的代码中添加 <code>useMemo</code>，以达到优化性能的目的。</p>
-<blockquote>
-<p>⚠️<br>依赖项数组不会作为参数传给“创建”函数。虽然从概念上来说它表现为：所有“创建”函数中引用的值都应该出现在依赖项数组中。未来编译器会更加智能，届时自动创建数组将成为可能。</p>
-</blockquote>
-<hr>
-<h2 id="2019-12-10-React-useCallback"><a href="#2019-12-10-React-useCallback" class="headerlink" title="2019.12.10 - React.useCallback"></a>2019.12.10 - React.useCallback</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const memoizedCallback = useCallback(</span><br><span class="line">  () =&gt; &#123;</span><br><span class="line">    doSomething(a, b);</span><br><span class="line">  &#125;,</span><br><span class="line">  [a, b],</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>返回一个 memoized 回调函数。</p>
-<p>把内联回调函数及依赖项数组作为参数传入 <code>useCallback</code>，它将返回该回调函数的 memoized 版本，该回调函数仅在某个依赖项改变时才会更新。当你把回调函数传递给经过优化的并使用引用相等性去避免非必要渲染（例如 <code>shouldComponentUpdate</code>）的子组件时，它将非常有用。</p>
-<p><code>useCallback(fn, deps)</code> 相当于 <code>useMemo(() =&gt; fn, deps)</code>。</p>
-<blockquote>
-<p>⚠️<br>依赖项数组不会作为参数传给“创建”函数。虽然从概念上来说它表现为：所有“创建”函数中引用的值都应该出现在依赖项数组中。未来编译器会更加智能，届时自动创建数组将成为可能。</p>
-</blockquote>
-<hr>
-<p>💾 参考资料</p>
-<ul>
-<li><a href="https://juejin.im/post/5d045350f265da1b695d5bf2" title="浅谈React性能优化的方向" target="_blank" rel="noopener">浅谈 React 性能优化的方向</a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/react-api.html#reactpurecomponent" title="React 顶层 API" target="_blank" rel="noopener">React 顶层 API</a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/optimizing-performance.html" title="Optimizing Performance" target="_blank" rel="noopener">Optimizing Performance</a></li>
-<li><a href="https://zh-hans.reactjs.org/docs/hooks-reference.html" title="Hook API 索引" target="_blank" rel="noopener">Hook API 索引</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1946,7 +1860,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1968,7 +1882,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -2029,7 +1943,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.5k字</span>
+  <span class="post-count">博客全站共14.4k字</span>
 </div>
         
 
