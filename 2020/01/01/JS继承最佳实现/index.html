@@ -82,7 +82,7 @@
 
 
 
-  <meta name="keywords" content="手写代码,instanceOf," />
+  <meta name="keywords" content="JS继承,class," />
 
 
 
@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="12345678910111213// 模拟 instanceoffunction instance_of(L, R) &amp;#123;    // L 表示左表达式，R 表示右表达式    var O = R.prototype; // 取 R 的显示原型    L = L.__proto__; // 取 L 的隐式原型    while (true) &amp;#123;        if (L ===">
-<meta name="keywords" content="手写代码,instanceOf">
+<meta name="description" content="ES51234567891011121314151617181920212223242526function Rectangle(length, width) &amp;#123;    this.length = length;    this.width = width;&amp;#125;Rectangle.protytype.getArea = function() &amp;#123;    return th">
+<meta name="keywords" content="JS继承,class">
 <meta property="og:type" content="article">
-<meta property="og:title" content="手写代码——实现instanceOf">
-<meta property="og:url" content="https://b1gf4cec4t.github.io/2019/12/29/手写代码——实现instanceOf/index.html">
+<meta property="og:title" content="JS继承最佳实现">
+<meta property="og:url" content="https://b1gf4cec4t.github.io/2020/01/01/JS继承最佳实现/index.html">
 <meta property="og:site_name" content="B1gF4ceC4t">
-<meta property="og:description" content="12345678910111213// 模拟 instanceoffunction instance_of(L, R) &amp;#123;    // L 表示左表达式，R 表示右表达式    var O = R.prototype; // 取 R 的显示原型    L = L.__proto__; // 取 L 的隐式原型    while (true) &amp;#123;        if (L ===">
+<meta property="og:description" content="ES51234567891011121314151617181920212223242526function Rectangle(length, width) &amp;#123;    this.length = length;    this.width = width;&amp;#125;Rectangle.protytype.getArea = function() &amp;#123;    return th">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-12-29T02:50:55.711Z">
+<meta property="og:updated_time" content="2020-01-01T02:20:31.409Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="手写代码——实现instanceOf">
-<meta name="twitter:description" content="12345678910111213// 模拟 instanceoffunction instance_of(L, R) &amp;#123;    // L 表示左表达式，R 表示右表达式    var O = R.prototype; // 取 R 的显示原型    L = L.__proto__; // 取 L 的隐式原型    while (true) &amp;#123;        if (L ===">
+<meta name="twitter:title" content="JS继承最佳实现">
+<meta name="twitter:description" content="ES51234567891011121314151617181920212223242526function Rectangle(length, width) &amp;#123;    this.length = length;    this.width = width;&amp;#125;Rectangle.protytype.getArea = function() &amp;#123;    return th">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://b1gf4cec4t.github.io/2019/12/29/手写代码——实现instanceOf/"/>
+  <link rel="canonical" href="https://b1gf4cec4t.github.io/2020/01/01/JS继承最佳实现/"/>
 
 
 
 
 
-  <title>手写代码——实现instanceOf | B1gF4ceC4t</title>
+  <title>JS继承最佳实现 | B1gF4ceC4t</title>
   
 
 
@@ -247,7 +247,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/29/手写代码——实现instanceOf/">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2020/01/01/JS继承最佳实现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fiona">
@@ -264,7 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">手写代码——实现instanceOf</h1>
+          <h1 class="post-title" itemprop="name headline">JS继承最佳实现</h1>
         
 
         <div class="post-meta">
@@ -276,8 +276,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-29T10:49:48+08:00">
-                2019-12-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-01T10:05:32+08:00">
+                2020-01-01
               </time>
             
 
@@ -347,7 +347,8 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 模拟 instanceof</span><br><span class="line">function instance_of(L, R) &#123;</span><br><span class="line">    // L 表示左表达式，R 表示右表达式</span><br><span class="line">    var O = R.prototype; // 取 R 的显示原型</span><br><span class="line">    L = L.__proto__; // 取 L 的隐式原型</span><br><span class="line">    while (true) &#123;</span><br><span class="line">        if (L === null) return false;</span><br><span class="line">        if (O === L)</span><br><span class="line">            // 这里重点：当 O 严格等于 L 时，返回 true</span><br><span class="line">            return true;</span><br><span class="line">        L = L.__proto__;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="ES5"><a href="#ES5" class="headerlink" title="ES5"></a>ES5</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function Rectangle(length, width) &#123;</span><br><span class="line">    this.length = length;</span><br><span class="line">    this.width = width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Rectangle.protytype.getArea = function() &#123;</span><br><span class="line">    return this.length * this.width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Square(length) &#123;</span><br><span class="line">    Rectangle.call(this, length, length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Square.prototype = Object.create(Rectangle.prototype, &#123;</span><br><span class="line">    constructor: &#123;</span><br><span class="line">        value: Square,</span><br><span class="line">        enumerable: true,</span><br><span class="line">        writable: true,</span><br><span class="line">        configurable: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var square = new Square(3);</span><br><span class="line">console.log(square.getArea());                // 9</span><br><span class="line">console.log(square instanceof Square);        // true</span><br><span class="line">console.log(square instanceof Rectangle);     // true</span><br></pre></td></tr></table></figure>
+<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle &#123;</span><br><span class="line">    constructor(length, width) &#123;</span><br><span class="line">        this.length = length;</span><br><span class="line">        this.width = width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getArea() &#123;</span><br><span class="line">        return this.length * this.width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Square extends Rectangle &#123;</span><br><span class="line">    constrctor(length) &#123;</span><br><span class="line">        super(length, length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var square = new Square(3);</span><br><span class="line">console.log(square.getArea());                // 9</span><br><span class="line">console.log(square instanceof Square);        // true</span><br><span class="line">console.log(square instanceof Rectangle);     // true</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -365,9 +366,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/手写代码/" rel="tag"># 手写代码</a>
+            <a href="/tags/JS继承/" rel="tag"># JS继承</a>
           
-            <a href="/tags/instanceOf/" rel="tag"># instanceOf</a>
+            <a href="/tags/class/" rel="tag"># class</a>
           
         </div>
       
@@ -380,8 +381,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/28/手写代码——实现EventEmeitter-event-bus/" rel="next" title="手写代码——实现EventEmeitter（event bus）">
-                <i class="fa fa-chevron-left"></i> 手写代码——实现EventEmeitter（event bus）
+              <a href="/2020/01/01/IE浏览器下下事件机制/" rel="next" title="IE浏览器下下事件机制">
+                <i class="fa fa-chevron-left"></i> IE浏览器下下事件机制
               </a>
             
           </div>
@@ -389,10 +390,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/12/29/手写代码——实现bind/" rel="prev" title="手写代码——实现bind">
-                手写代码——实现bind <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -444,8 +441,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -505,6 +511,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES5"><span class="nav-number">1.</span> <span class="nav-text">ES5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6"><span class="nav-number">2.</span> <span class="nav-text">ES6</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -243,6 +243,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2020/01/01/JS继承最佳实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fiona">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B1gF4ceC4t">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/01/JS继承最佳实现/" itemprop="url">JS继承最佳实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-01T10:05:32+08:00">
+                2020-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/" itemprop="url" rel="index">
+                    <span itemprop="name">Technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Technology/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ES5"><a href="#ES5" class="headerlink" title="ES5"></a>ES5</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function Rectangle(length, width) &#123;</span><br><span class="line">    this.length = length;</span><br><span class="line">    this.width = width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Rectangle.protytype.getArea = function() &#123;</span><br><span class="line">    return this.length * this.width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Square(length) &#123;</span><br><span class="line">    Rectangle.call(this, length, length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Square.prototype = Object.create(Rectangle.prototype, &#123;</span><br><span class="line">    constructor: &#123;</span><br><span class="line">        value: Square,</span><br><span class="line">        enumerable: true,</span><br><span class="line">        writable: true,</span><br><span class="line">        configurable: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var square = new Square(3);</span><br><span class="line">console.log(square.getArea());                // 9</span><br><span class="line">console.log(square instanceof Square);        // true</span><br><span class="line">console.log(square instanceof Rectangle);     // true</span><br></pre></td></tr></table></figure>
+<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Rectangle &#123;</span><br><span class="line">    constructor(length, width) &#123;</span><br><span class="line">        this.length = length;</span><br><span class="line">        this.width = width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getArea() &#123;</span><br><span class="line">        return this.length * this.width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Square extends Rectangle &#123;</span><br><span class="line">    constrctor(length) &#123;</span><br><span class="line">        super(length, length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var square = new Square(3);</span><br><span class="line">console.log(square.getArea());                // 9</span><br><span class="line">console.log(square instanceof Square);        // true</span><br><span class="line">console.log(square instanceof Rectangle);     // true</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2020/01/01/IE浏览器下下事件机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1656,162 +1810,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2019/12/23/正则表达式中使用变量的正确姿势/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fiona">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="B1gF4ceC4t">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/23/正则表达式中使用变量的正确姿势/" itemprop="url">正则表达式中使用变量的正确姿势</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-23T15:22:26+08:00">
-                2019-12-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/" itemprop="url" rel="index">
-                    <span itemprop="name">Technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Technology/FontEnd/" itemprop="url" rel="index">
-                    <span itemprop="name">FontEnd</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在项目中看到有人写了如下一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Object.keys(values).forEach(function (key) &#123;</span><br><span class="line">    resultStr = resultStr.replace(</span><br><span class="line">        eval(&quot;/&#123;&quot; + key + &quot;&#125;/g&quot;),</span><br><span class="line">        values[key]</span><br><span class="line">    );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>在正则表达式中使用变量增加了匹配的灵活性，但使用 <code>eval</code> 实在是太不推荐了，这里还是建议使用 <code>构造函数</code>，改造后代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Object.keys(values).forEach(function (key) &#123;</span><br><span class="line">    resultStr = resultStr.replace(</span><br><span class="line">        new RegExp(&quot;&#123;&quot; + key + &quot;&#125;&quot;, &quot;g&quot;),</span><br><span class="line">        values[key]</span><br><span class="line">    );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1862,7 +1860,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1884,7 +1882,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -1945,7 +1943,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共14.7k字</span>
+  <span class="post-count">博客全站共14.8k字</span>
 </div>
         
 
