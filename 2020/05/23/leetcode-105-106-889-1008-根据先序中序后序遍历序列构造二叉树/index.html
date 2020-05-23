@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("https://b1gf4cec4t.github.io"); 
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="leetcode,binary tree," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="leetcode 105.从前序与中序遍历序列构造二叉树 [Medium]题目地址https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ 题目描述根据一棵树的前序遍历与中序遍历构造二叉树。 注意:你可以假设树中没有重复的元素。 例如，给出  前序遍历 preorder =">
+<meta name="keywords" content="leetcode,binary tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode - [105.106.889.1008]根据先序中序后序遍历序列构造二叉树">
+<meta property="og:url" content="https://b1gf4cec4t.github.io/2020/05/23/leetcode-105-106-889-1008-根据先序中序后序遍历序列构造二叉树/index.html">
+<meta property="og:site_name" content="B1gF4ceC4t">
+<meta property="og:description" content="leetcode 105.从前序与中序遍历序列构造二叉树 [Medium]题目地址https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ 题目描述根据一棵树的前序遍历与中序遍历构造二叉树。 注意:你可以假设树中没有重复的元素。 例如，给出  前序遍历 preorder =">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-05-23T05:24:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcode - [105.106.889.1008]根据先序中序后序遍历序列构造二叉树">
+<meta name="twitter:description" content="leetcode 105.从前序与中序遍历序列构造二叉树 [Medium]题目地址https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ 题目描述根据一棵树的前序遍历与中序遍历构造二叉树。 注意:你可以假设树中没有重复的元素。 例如，给出  前序遍历 preorder =">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://b1gf4cec4t.github.io/2020/05/23/leetcode-105-106-889-1008-根据先序中序后序遍历序列构造二叉树/"/>
+
+
+
+
+
+  <title>leetcode - [105.106.889.1008]根据先序中序后序遍历序列构造二叉树 | B1gF4ceC4t</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">B1gF4ceC4t</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://b1gf4cec4t.github.io/2020/05/23/leetcode-105-106-889-1008-根据先序中序后序遍历序列构造二叉树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fiona">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="B1gF4ceC4t">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">leetcode - [105.106.889.1008]根据先序中序后序遍历序列构造二叉树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-23T10:20:45+08:00">
+                2020-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="leetcode-105-从前序与中序遍历序列构造二叉树-Medium"><a href="#leetcode-105-从前序与中序遍历序列构造二叉树-Medium" class="headerlink" title="leetcode 105.从前序与中序遍历序列构造二叉树 [Medium]"></a><font id="105">leetcode 105.从前序与中序遍历序列构造二叉树 <span style="color:rgb(239, 108, 0, 0.8)">[Medium]</span></font></h2><h3 id="题目地址"><a href="#题目地址" class="headerlink" title="题目地址"></a>题目地址</h3><p><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>根据一棵树的前序遍历与中序遍历构造二叉树。</p>
+<p><strong>注意:</strong><br>你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<blockquote>
+<p>前序遍历 preorder = [3,9,20,15,7]<br>中序遍历 inorder = [9,3,15,20,7]</p>
+</blockquote>
+<p>返回如下的二叉树：</p>
+<blockquote>
+<p>&emsp;&emsp;&emsp;3<br>&emsp;&emsp;&ensp;/ &ensp;&ensp;\<br>&emsp;&ensp; 9 &emsp;20<br>&emsp;&ensp;/ &ensp;\<br>&ensp;15 &emsp;7</p>
+</blockquote>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>思路：递归构造子树<br>前序遍历： [ 根, &ensp;[左子树的前序遍历], &ensp;[右子树的前序遍历] ]<br>中序遍历： [ [左子树的中序遍历], &ensp;根, &ensp;[右子树的中序遍历] ]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * @lc app=leetcode.cn id=105 lang=javascript</span><br><span class="line"> *</span><br><span class="line"> * [105] 从前序与中序遍历序列构造二叉树</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">// @lc code=start</span><br><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.left = this.right = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">function TreeNode(val) &#123;</span><br><span class="line">    this.val = val;</span><br><span class="line">    this.left = this.right = null;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; preorder</span><br><span class="line"> * @param &#123;number[]&#125; inorder</span><br><span class="line"> * @return &#123;TreeNode&#125;</span><br><span class="line"> */</span><br><span class="line">var buildTree = function(preorder, inorder) &#123;</span><br><span class="line">    if (preorder.length === 0) return null;</span><br><span class="line">    const r = preorder[0];</span><br><span class="line">    const i = inorder.indexOf(r);</span><br><span class="line">    const root = new TreeNode(r);</span><br><span class="line">    root.left = buildTree(preorder.slice(1, 1 + i), inorder.slice(0, i));</span><br><span class="line">    root.right = buildTree(preorder.slice(1 + i), inorder.slice(i + 1));</span><br><span class="line">    return root;</span><br><span class="line">&#125;;</span><br><span class="line">// @lc code=end</span><br></pre></td></tr></table></figure>
+<h2 id="leetcode-105-从中序与后序遍历序列构造二叉树-Medium"><a href="#leetcode-105-从中序与后序遍历序列构造二叉树-Medium" class="headerlink" title="leetcode 105.从中序与后序遍历序列构造二叉树 [Medium]"></a>leetcode 105.从中序与后序遍历序列构造二叉树 <span style="color:rgb(239, 108, 0, 0.8)">[Medium]</span></h2><h3 id="题目地址-1"><a href="#题目地址-1" class="headerlink" title="题目地址"></a>题目地址</h3><p><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/</a></p>
+<h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>根据一棵树的中序遍历与后序遍历构造二叉树。</p>
+<p><strong>注意:</strong><br>你可以假设树中没有重复的元素。</p>
+<p>例如，给出</p>
+<blockquote>
+<p>中序遍历 inorder = [9,3,15,20,7]<br>后序遍历 postorder = [9,15,7,20,3]</p>
+</blockquote>
+<blockquote>
+<p>&emsp;&emsp;&emsp;3<br>&emsp;&emsp;&ensp;/ &ensp;&ensp;\<br>&emsp;&ensp; 9 &emsp;20<br>&emsp;&emsp;&emsp;&emsp;/ &ensp;\<br>&emsp;&emsp;&emsp;15 &emsp;7</p>
+</blockquote>
+<h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p>思路：递归构造子树<br>中序遍历： [ [左子树的中序遍历], &ensp;根, &ensp;[右子树的中序遍历] ]<br>后序遍历： [ [左子树的后序遍历], &ensp;[右子树的后序遍历], &ensp;根 ]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * @lc app=leetcode.cn id=106 lang=javascript</span><br><span class="line"> *</span><br><span class="line"> * [106] 从中序与后序遍历序列构造二叉树</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">// @lc code=start</span><br><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.left = this.right = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">function TreeNode(val) &#123;</span><br><span class="line">    this.val = val;</span><br><span class="line">    this.left = this.right = null;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; inorder</span><br><span class="line"> * @param &#123;number[]&#125; postorder</span><br><span class="line"> * @return &#123;TreeNode&#125;</span><br><span class="line"> */</span><br><span class="line">var buildTree = function(inorder, postorder) &#123;</span><br><span class="line">    if (postorder.length === 0) return null;</span><br><span class="line">    const r = postorder[postorder.length - 1];</span><br><span class="line">    const i = inorder.indexOf(r);</span><br><span class="line">    let root = new TreeNode(r);</span><br><span class="line">    root.left = buildTree(inorder.slice(0, i), postorder.slice(0, i));</span><br><span class="line">    root.right = buildTree(inorder.slice(i + 1), postorder.slice(i, -1));</span><br><span class="line">    return root;</span><br><span class="line">&#125;;</span><br><span class="line">// @lc code=end</span><br></pre></td></tr></table></figure>
+<h2 id="leetcode-889-根据前序和后序遍历构造二叉树-Medium"><a href="#leetcode-889-根据前序和后序遍历构造二叉树-Medium" class="headerlink" title="leetcode 889.根据前序和后序遍历构造二叉树 [Medium]"></a>leetcode 889.根据前序和后序遍历构造二叉树 <span style="color:rgb(239, 108, 0, 0.8)">[Medium]</span></h2><h3 id="题目地址-2"><a href="#题目地址-2" class="headerlink" title="题目地址"></a>题目地址</h3><p><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/</a></p>
+<h3 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h3><p>返回与给定的前序和后序遍历匹配的任何二叉树。</p>
+<p>pre 和 post 遍历中的值是不同的正整数。</p>
+<p>示例：</p>
+<blockquote>
+<p>输入：pre = [1,2,4,5,3,6,7], post = [4,5,2,6,7,3,1]<br>输出：[1,2,3,4,5,6,7]</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= pre.length == post.length &lt;= 30</li>
+<li>pre[]  和  post[]  都是  1, 2, …, pre.length  的排列</li>
+<li>每个输入保证至少有一个答案。如果有多个答案，可以返回其中一个。</li>
+</ul>
+<h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><p>思路：递归构造子树<br>前序遍历： [ 根, &ensp;[左子树的前序遍历], &ensp;[右子树的前序遍历] ]<br>后序遍历： [ [左子树的后序遍历], &ensp;[右子树的后序遍历], &ensp;根 ]</p>
+<p>前序遍历的第一项以及后序遍历的最后一项一定是当前树的根，重点是如何把另外的序列区分出左子树和右子树的遍历序列。利用子树的前序遍历和后序遍历的根依旧是一个根在头、一个根在尾，所以从头遍历后序序列，找到和前序序列第 <code>1</code> 项（第 <code>0</code> 项是左右子树的父亲节点）相同的位置，则可以得到左子树后序序列的长度，则可以拆分左右子树遍历序列，进入下一层递归。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * @lc app=leetcode.cn id=889 lang=javascript</span><br><span class="line"> *</span><br><span class="line"> * [889] 根据前序和后序遍历构造二叉树</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">// @lc code=start</span><br><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.left = this.right = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">function TreeNode(val) &#123;</span><br><span class="line">    this.val = val;</span><br><span class="line">    this.left = this.right = null;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; pre</span><br><span class="line"> * @param &#123;number[]&#125; post</span><br><span class="line"> * @return &#123;TreeNode&#125;</span><br><span class="line"> */</span><br><span class="line">var constructFromPrePost = function(pre, post) &#123;</span><br><span class="line">    if (pre.length === 0) return null;</span><br><span class="line">    const r = pre[0];</span><br><span class="line">    const root = new TreeNode(r);</span><br><span class="line">    let i = 0;</span><br><span class="line">    while (i &lt; post.length) &#123;</span><br><span class="line">        if (post[i] === pre[1]) break;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    root.left = constructFromPrePost(pre.slice(1, i + 2), post.slice(0, i + 1));</span><br><span class="line">    root.right = constructFromPrePost(pre.slice(i + 2), post.slice(i + 1, -1));</span><br><span class="line">    return root;</span><br><span class="line">&#125;;</span><br><span class="line">// @lc code=end</span><br></pre></td></tr></table></figure>
+<h2 id="leetcode-1008-先序遍历构造二叉搜索树-Medium"><a href="#leetcode-1008-先序遍历构造二叉搜索树-Medium" class="headerlink" title="leetcode 1008.先序遍历构造二叉搜索树 [Medium]"></a>leetcode 1008.先序遍历构造二叉搜索树 <span style="color:rgb(239, 108, 0, 0.8)">[Medium]</span></h2><h3 id="题目地址-3"><a href="#题目地址-3" class="headerlink" title="题目地址"></a>题目地址</h3><p><a href="https://leetcode-cn.com/problems/construct-binary-search-tree-from-preorder-traversal/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/construct-binary-search-tree-from-preorder-traversal/</a></p>
+<h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><p>返回与给定先序遍历 preorder 相匹配的二叉搜索树（binary search tree）的根结点。</p>
+<p>(回想一下，二叉搜索树是二叉树的一种，其每个节点都满足以下规则，对于 node.left 的任何后代，值总 &lt; node.val，而 node.right 的任何后代，值总 &gt; node.val。此外，先序遍历首先显示节点的值，然后遍历 node.left，接着遍历 node.right。）</p>
+<p>示例：</p>
+<blockquote>
+<p>输入：[8,5,1,7,10,12]<br>输出：[8,5,10,1,7,null,12]</p>
+</blockquote>
+<blockquote>
+<p>&emsp;&emsp;&emsp;8<br>&emsp;&emsp;&ensp;/ &ensp;&ensp;\<br>&emsp;&ensp; 5 &emsp;10<br>&emsp;&ensp;/ &ensp;\&emsp;&emsp;&ensp;\<br>&ensp; 1 &emsp;7&emsp;&emsp;12</p>
+</blockquote>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= preorder.length &lt;= 100</li>
+<li>先序 preorder 中的值是不同的。</li>
+</ul>
+<h3 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h3><h4 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h4><p>思路：利用二叉搜索树中序遍历一定是升序这一大特点，将先序序列排序得到中序序列，然后转化为上面👆<a href="#105"><code>105</code></a> 题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * @lc app=leetcode.cn id=1008 lang=javascript</span><br><span class="line"> *</span><br><span class="line"> * [1008] 先序遍历构造二叉树</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">// @lc code=start</span><br><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val, left, right) &#123;</span><br><span class="line"> *     this.val = (val===undefined ? 0 : val)</span><br><span class="line"> *     this.left = (left===undefined ? null : left)</span><br><span class="line"> *     this.right = (right===undefined ? null : right)</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">function TreeNode(val, left = null, right = null) &#123;</span><br><span class="line">    this.val = val;</span><br><span class="line">    this.left = left;</span><br><span class="line">    this.right = right;</span><br><span class="line">&#125;</span><br><span class="line">function buildTree(preorder, inorder) &#123;</span><br><span class="line">    if (preorder.length === 0) return null;</span><br><span class="line">    const r = preorder[0];</span><br><span class="line">    const i = inorder.indexOf(r);</span><br><span class="line">    let root = new TreeNode(r);</span><br><span class="line">    root.left = buildTree(preorder.slice(1, 1 + i), inorder.slice(0, i));</span><br><span class="line">    root.right = buildTree(preorder.slice(1 + i), inorder.slice(i + 1));</span><br><span class="line">    return root;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; preorder</span><br><span class="line"> * @return &#123;TreeNode&#125;</span><br><span class="line"> */</span><br><span class="line">var bstFromPreorder = function(preorder) &#123;</span><br><span class="line">    const inorder = preorder.concat().sort((a, b) =&gt; a - b);</span><br><span class="line">    return buildTree(preorder, inorder);</span><br><span class="line">&#125;;</span><br><span class="line">// @lc code=end</span><br></pre></td></tr></table></figure>
+<h4 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h4><p>思路：不使用递归而使用迭代</p>
+<ul>
+<li>首先将第一个数据入栈</li>
+<li>然后遍历其余节点与当前节点（栈顶）比较<pre><code>- 如果小于当前节点，直接放在左边
+- 否则从栈顶向下寻找第一个比当前节点小的节点，放到该节点的右边
+</code></pre></li>
+<li>将当前节点入栈，继续处理后续节点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * @lc app=leetcode.cn id=1008 lang=javascript</span><br><span class="line"> *</span><br><span class="line"> * [1008] 先序遍历构造二叉树</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">// @lc code=start</span><br><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val, left, right) &#123;</span><br><span class="line"> *     this.val = (val===undefined ? 0 : val)</span><br><span class="line"> *     this.left = (left===undefined ? null : left)</span><br><span class="line"> *     this.right = (right===undefined ? null : right)</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">function TreeNode(val, left = null, right = null) &#123;</span><br><span class="line">    this.val = val;</span><br><span class="line">    this.left = left;</span><br><span class="line">    this.right = right;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; preorder</span><br><span class="line"> * @return &#123;TreeNode&#125;</span><br><span class="line"> */</span><br><span class="line">var bstFromPreorder = function(preorder) &#123;</span><br><span class="line">    if (preorder.length === 0) return null;</span><br><span class="line">    let root = new TreeNode(preorder.shift());</span><br><span class="line">    let stack = [root];</span><br><span class="line">    for (let o of preorder) &#123;</span><br><span class="line">        let node = stack[stack.length - 1];</span><br><span class="line">        if (node.val &gt; o) &#123;</span><br><span class="line">            node.left = new TreeNode(o);</span><br><span class="line">            stack.push(node.left);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            while (stack.length &amp;&amp; stack[stack.length - 1].val &lt; o) &#123;</span><br><span class="line">                node = stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            node.right = new TreeNode(o);</span><br><span class="line">            stack.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return root;</span><br><span class="line">&#125;;</span><br><span class="line">// @lc code=end</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          
+            <a href="/tags/binary-tree/" rel="tag"># binary tree</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/22/leetcode-12-13-整数和罗马数字相互转换/" rel="next" title="leetcode - [12.13]整数和罗马数字相互转换">
+                <i class="fa fa-chevron-left"></i> leetcode - [12.13]整数和罗马数字相互转换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Fiona</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#leetcode-105-从前序与中序遍历序列构造二叉树-Medium"><span class="nav-number">1.</span> <span class="nav-text">leetcode 105.从前序与中序遍历序列构造二叉树 [Medium]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目地址"><span class="nav-number">1.1.</span> <span class="nav-text">题目地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">1.3.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leetcode-105-从中序与后序遍历序列构造二叉树-Medium"><span class="nav-number">2.</span> <span class="nav-text">leetcode 105.从中序与后序遍历序列构造二叉树 [Medium]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目地址-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-1"><span class="nav-number">2.2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-1"><span class="nav-number">2.3.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leetcode-889-根据前序和后序遍历构造二叉树-Medium"><span class="nav-number">3.</span> <span class="nav-text">leetcode 889.根据前序和后序遍历构造二叉树 [Medium]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目地址-2"><span class="nav-number">3.1.</span> <span class="nav-text">题目地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-2"><span class="nav-number">3.2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-2"><span class="nav-number">3.3.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leetcode-1008-先序遍历构造二叉搜索树-Medium"><span class="nav-number">4.</span> <span class="nav-text">leetcode 1008.先序遍历构造二叉搜索树 [Medium]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目地址-3"><span class="nav-number">4.1.</span> <span class="nav-text">题目地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-3"><span class="nav-number">4.2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解-3"><span class="nav-number">4.3.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解法一"><span class="nav-number">4.3.1.</span> <span class="nav-text">解法一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解法二"><span class="nav-number">4.3.2.</span> <span class="nav-text">解法二</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fiona</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共18.9k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
